@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Elements Food App</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_global_search">Search</string>
+    <string name="title_categories">Categories</string>
+</resources>
