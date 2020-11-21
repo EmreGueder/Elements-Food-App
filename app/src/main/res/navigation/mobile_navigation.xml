@@ -18,12 +18,6 @@
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
-        android:id="@+id/navigation_global_search"
-        android:name="com.example.elementsfoodapp.ui.globalSearch.GlobalSearchFragment"
-        android:label="@string/title_global_search"
-        tools:layout="@layout/fragment_global_search" />
-
-    <fragment
         android:id="@+id/navigation_categories"
         android:name="com.example.elementsfoodapp.ui.categories.CategoriesFragment"
         android:label="@string/title_categories"

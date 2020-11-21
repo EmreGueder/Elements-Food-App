@@ -16,9 +16,4 @@
         android:id="@+id/navigation_favorites"
         android:icon="@drawable/ic_favorites_black_24dp"
         android:title="@string/title_favorites" />
-
-    <item
-        android:id="@+id/navigation_global_search"
-        android:icon="@drawable/ic_global_search_black_24dp"
-        android:title="@string/title_global_search" />
 </menu>
