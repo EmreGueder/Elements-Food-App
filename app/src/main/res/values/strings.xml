@@ -4,4 +4,6 @@
     <string name="title_favorites">Favorites</string>
     <string name="title_global_search">Search</string>
     <string name="title_categories">Categories</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search Food</string>
 </resources>
