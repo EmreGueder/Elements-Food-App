@@ -2,7 +2,7 @@ package com.example.elementsfoodapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,9 @@ public class SearchableActivity extends AppCompatActivity {
         handleIntent(getIntent());
     }
 
-    @SuppressLint("MissingSuperCall")
     @Override
     protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         handleIntent(intent);
     }
 

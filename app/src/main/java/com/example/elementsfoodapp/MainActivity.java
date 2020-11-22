@@ -3,9 +3,10 @@ package com.example.elementsfoodapp;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
+
 import android.view.Menu;
 import android.view.MenuInflater;
+
 import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_favorites, R.id.navigation_categories)
+                R.id.navigation_home, R.id.navigation_categories, R.id.navigation_favorites)
                 .build();
         NavController navController = Navigation.findNavController(
                 this, R.id.nav_host_fragment);
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false);
+        searchView.setQueryHint(getResources().getString(R.string.search_hint));
+
         return true;
     }
 }
