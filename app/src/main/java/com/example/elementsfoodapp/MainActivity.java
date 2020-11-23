@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuInflater;
-
+import android.view.MenuItem;
 import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +19,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +47,22 @@ public class MainActivity extends AppCompatActivity {
 
         //Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false);
+
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
 
         return true;
+    }
+
+    //Required for SearchView to gain focus, resulting the keyboard to show up after tapping the search icon
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.search) {
+            searchView.setIconifiedByDefault(false);
+            searchView.setIconified(false);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
