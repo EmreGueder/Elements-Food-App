@@ -50,17 +50,18 @@ public class MainActivity extends AppCompatActivity {
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
+        searchView.setIconifiedByDefault(false);
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
 
         return true;
     }
 
-    //Required for SearchView to gain focus, resulting the keyboard to show up after tapping the search icon
+    //Required for SearchView to gain focus,
+    //resulting the keyboard to show up after tapping the search icon
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.search) {
-            searchView.setIconifiedByDefault(false);
             searchView.setIconified(false);
         }
         return super.onOptionsItemSelected(item);
