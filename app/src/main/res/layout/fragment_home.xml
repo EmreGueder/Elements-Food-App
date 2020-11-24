@@ -14,6 +14,8 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/add_new_food"
         android:src="@drawable/ic_fab_add_white_24dp"
+        app:tint="@android:color/white"
+        app:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
