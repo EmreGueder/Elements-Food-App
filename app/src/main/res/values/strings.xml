@@ -6,4 +6,5 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Search …</string>
     <string name="add_new_food">Add new food</string>
+    <string name="action_confirm">Confirm</string>
 </resources>
