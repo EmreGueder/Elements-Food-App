@@ -9,12 +9,10 @@
     <string name="action_confirm">Confirm</string>
     <string name="add_food_name">Add food name</string>
     <string name="add_food_effect">Add food effect</string>
-
-    <string-array name="food_elements_array">
-        <item>Wood</item>
-        <item>Fire</item>
-        <item>Earth</item>
-        <item>Metal</item>
-        <item>Water</item>
-    </string-array>
+    <string name="select_food_type">Food type</string>
+    <string name="select_food_element">Food element</string>
+    <string name="select_food_flavor">Food flavor</string>
+    <string name="select_food_temperature_behavior">Food temperature behavior</string>
+    <string name="select_food_target_organ">Food target organ</string>
+    <string name="display_items">%1$s, </string>
 </resources>
