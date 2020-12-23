@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:layout_margin="1dp"
+    android:padding="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:onClick="openDialog">
+
+    <TextView
+        android:id="@+id/mtrl_list_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:padding="1dp"
+        android:text="Element"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mtrl_list_item_secondary_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mtrl_list_item_text"
+        android:layout_gravity="center_vertical"
+        android:maxLines="2"
+        android:padding="1dp"
+        android:text="Feuer"
+        android:textAppearance="?attr/textAppearanceBody2" />
+</RelativeLayout>

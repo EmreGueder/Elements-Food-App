@@ -2,29 +2,40 @@ package com.example.elementsfoodapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 public class AddNewFoodActivity extends AppCompatActivity {
 
-    String[] elements = new String[]{"Wood", "Fire", "Earth", "Metal", "Water"};
+    String[] elements;
     boolean[] checkedElements = new boolean[]{false, false, false, false, false};
 
-    TextInputEditText elementsEditText;
+    //TextInputEditText elementsEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_food);
 
-        elementsEditText = (TextInputEditText) findViewById(R.id.selectFoodElement);
+        CustomAdapter adapter = new CustomAdapter(this);
+        RecyclerView recyclerView = findViewById(R.id.foodPropertiesView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        Resources res = getResources();
+        elements = res.getStringArray(R.array.elements_array);
+        //elementsEditText = (TextInputEditText) findViewById(R.id.selectFoodElement);
     }
 
     @Override
@@ -57,7 +68,7 @@ public class AddNewFoodActivity extends AppCompatActivity {
                 for (int i = 0; i<checkedElements.length; i++) {
                     boolean checked = checkedElements[i];
                     if (checked) {
-                        elementsEditText.setText(getString(R.string.display_items, elements[i]));
+                        //elementsEditText.setText(getString(R.string.display_items, elements[i]));
                     }
                 }
             }
