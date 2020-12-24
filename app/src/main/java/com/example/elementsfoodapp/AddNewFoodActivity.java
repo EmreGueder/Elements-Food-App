@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
+
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
@@ -66,46 +66,40 @@ public class AddNewFoodActivity extends AppCompatActivity
             builder.setTitle("Suche Lebensmittelart aus");
 
             builder.setMultiChoiceItems(
-                    foodType, checkedFoodType, new DialogInterface.OnMultiChoiceClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                            //Update the current item's checked status
-                            checkedFoodType[which] = isChecked;
+                    foodType, checkedFoodType, (dialog, which, isChecked) -> {
+                        //Update the current item's checked status
+                        checkedFoodType[which] = isChecked;
 
-                            if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 1) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Maximal eine Art", Toast.LENGTH_SHORT).show();
-                                checkedFoodType[which] = false;
-                                ((AlertDialog) dialog).getListView().setItemChecked(
-                                        which, false);
-                            }
+                        if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 1) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Maximal eine Art", Toast.LENGTH_SHORT).show();
+                            checkedFoodType[which] = false;
+                            ((AlertDialog) dialog).getListView().setItemChecked(
+                                    which, false);
                         }
                     });
 
             //Set positive button
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
-                            .findViewHolderForAdapterPosition(position);
-                    assert holder != null;
-                    for (int i = 0; i < checkedFoodType.length; i++) {
-                        boolean checked = checkedFoodType[i];
-                        if (checked) {
-                            holder.getSecondaryTextView().setText(foodType[i]);
-                        }
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                        .findViewHolderForAdapterPosition(position);
+                assert holder != null;
+                for (int i = 0; i < checkedFoodType.length; i++) {
+                    boolean checked = checkedFoodType[i];
+                    if (checked) {
+                        holder.getSecondaryTextView().setText(foodType[i]);
                     }
+                }
 
-                    boolean allFalse = true;
-                    for (boolean b : checkedFoodType) {
-                        if (b) {
-                            allFalse = false;
-                            break;
-                        }
+                boolean allFalse = true;
+                for (boolean b : checkedFoodType) {
+                    if (b) {
+                        allFalse = false;
+                        break;
                     }
-                    if (allFalse) {
-                        holder.getSecondaryTextView().setText("");
-                    }
+                }
+                if (allFalse) {
+                    holder.getSecondaryTextView().setText("");
                 }
             });
         }
@@ -114,63 +108,53 @@ public class AddNewFoodActivity extends AppCompatActivity
             builder.setTitle("Suche Element(e) aus");
 
             builder.setMultiChoiceItems(
-                    elements, checkedElements, new DialogInterface.OnMultiChoiceClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                            //Update the current item's checked status
-                            checkedElements[which] = isChecked;
+                    elements, checkedElements, (dialog, which, isChecked) -> {
+                        //Update the current item's checked status
+                        checkedElements[which] = isChecked;
 
-                            if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 2) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Maximal 2 Elemente", Toast.LENGTH_SHORT).show();
-                                checkedElements[which] = false;
-                                ((AlertDialog) dialog).getListView().setItemChecked(
-                                        which, false);
-                            }
+                        if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 2) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Maximal 2 Elemente", Toast.LENGTH_SHORT).show();
+                            checkedElements[which] = false;
+                            ((AlertDialog) dialog).getListView().setItemChecked(
+                                    which, false);
                         }
                     });
 
             //Set positive button
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    StringBuilder items = new StringBuilder();
-                    CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
-                            .findViewHolderForAdapterPosition(position);
-                    assert holder != null;
-                    for (int i = 0; i < checkedElements.length; i++) {
-                        boolean checked = checkedElements[i];
-                        if (checked) {
-                            items.append(elements[i]).append(", ");
-                        }
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                StringBuilder items = new StringBuilder();
+                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                        .findViewHolderForAdapterPosition(position);
+                assert holder != null;
+                for (int i = 0; i < checkedElements.length; i++) {
+                    boolean checked = checkedElements[i];
+                    if (checked) {
+                        items.append(elements[i]).append(", ");
                     }
+                }
 
-                    if (items.length() > 2)
-                        items.deleteCharAt(items.length() - 2);
-                    holder.getSecondaryTextView().setText(items.toString());
+                if (items.length() > 2)
+                    items.deleteCharAt(items.length() - 2);
+                holder.getSecondaryTextView().setText(items.toString());
 
-                    boolean allFalse = true;
-                    for (boolean b : checkedElements) {
-                        if (b) {
-                            allFalse = false;
-                            break;
-                        }
+                boolean allFalse = true;
+                for (boolean b : checkedElements) {
+                    if (b) {
+                        allFalse = false;
+                        break;
                     }
-                    if (allFalse) {
-                        holder.getSecondaryTextView().setText("");
-                    }
+                }
+                if (allFalse) {
+                    holder.getSecondaryTextView().setText("");
                 }
             });
         }
 
         //Set negative button
-        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),
-                        "Abgebrochen", Toast.LENGTH_SHORT).show();
-            }
-        });
+        builder.setNegativeButton("Abbrechen", (dialog, which) ->
+                Toast.makeText(getApplicationContext(), "Abgebrochen", Toast.LENGTH_SHORT)
+                        .show());
 
         //Creating AlertDialog
         AlertDialog alertDialog = builder.create();

@@ -21,12 +21,9 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddNewFoodActivity.class);
-                v.getContext().startActivity(intent);
-            }
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), AddNewFoodActivity.class);
+            v.getContext().startActivity(intent);
         });
         return root;
     }
