@@ -12,26 +12,43 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static ListItemClickListener mOnClickListener;
     private final String[] foodProperties;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final TextView titleTextView;
+        private final TextView secondaryTextView;
 
-        public ViewHolder(View view) {
+        public ViewHolder(@NonNull View view) {
             super(view);
-            // Define click listener for the ViewHolder's View
-
-            textView = (TextView) view.findViewById(R.id.mtrl_list_item_text);
+            titleTextView = view.findViewById(R.id.mtrl_list_item_title_text);
+            secondaryTextView = view.findViewById(R.id.mtrl_list_item_secondary_text);
+            view.setOnClickListener(this);
         }
 
-        public TextView getTextView() {
-            return textView;
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            mOnClickListener.onListItemClick(v, position);
+        }
+
+        public TextView getTitleTextView() {
+            return titleTextView;
+        }
+
+        public TextView getSecondaryTextView() {
+            return secondaryTextView;
         }
     }
 
-    public CustomAdapter(Context context) {
+    public interface ListItemClickListener {
+        void onListItemClick(View v, int position);
+    }
+
+    public CustomAdapter(Context context, ListItemClickListener onClickListener) {
         Resources res = context.getResources();
         foodProperties = res.getStringArray(R.array.food_properties_array);
+        mOnClickListener = onClickListener;
     }
 
     @NonNull
@@ -44,7 +61,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).getTextView().setText(foodProperties[position]);
+        ((ViewHolder)holder).getTitleTextView().setText(foodProperties[position]);
     }
 
     @Override

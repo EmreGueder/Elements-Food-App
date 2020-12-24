@@ -14,7 +14,6 @@
     <string name="select_food_flavor">Food flavor</string>
     <string name="select_food_temperature_behavior">Food temperature behavior</string>
     <string name="select_food_target_organ">Food target organ</string>
-    <string name="display_items">%1$s, </string>
     <string-array name="elements_array">
         <item>Holz</item>
         <item>Feuer</item>

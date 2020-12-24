@@ -2,6 +2,7 @@ package com.example.elementsfoodapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,15 +12,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
+import java.util.ArrayList;
 
-public class AddNewFoodActivity extends AppCompatActivity {
+public class AddNewFoodActivity extends AppCompatActivity
+        implements CustomAdapter.ListItemClickListener {
 
-    String[] elements;
-    boolean[] checkedElements = new boolean[]{false, false, false, false, false};
+    private RecyclerView recyclerView;
+    private String[] elements;
+    private final boolean[] checkedElements = new boolean[]{false, false, false, false, false};
 
     //TextInputEditText elementsEditText;
 
@@ -28,11 +30,13 @@ public class AddNewFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_food);
 
-        CustomAdapter adapter = new CustomAdapter(this);
-        RecyclerView recyclerView = findViewById(R.id.foodPropertiesView);
+        CustomAdapter adapter = new CustomAdapter(this, this);
+        recyclerView = findViewById(R.id.foodPropertiesView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration itemDecor = new DividerItemDecoration(
+                recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecor);
         recyclerView.setAdapter(adapter);
-
         Resources res = getResources();
         elements = res.getStringArray(R.array.elements_array);
         //elementsEditText = (TextInputEditText) findViewById(R.id.selectFoodElement);
@@ -45,31 +49,51 @@ public class AddNewFoodActivity extends AppCompatActivity {
         return true;
     }
 
-    public void openDialog(View v) {
+    @Override
+    public void onListItemClick(View v, int position) {
+        openDialog(v, position);
+    }
+
+    public void openDialog(View v, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Setting AlertDialog Characteristics
         builder.setTitle("Select items");
 
         //Building the list to be shown in AlertDialog
-        builder.setMultiChoiceItems(
-                elements, checkedElements, new DialogInterface.OnMultiChoiceClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                //Update the current item's checked status
-                checkedElements[which] = isChecked;
-            }
-        });
+        if(position == 1) {
+            builder.setMultiChoiceItems(
+                    elements, checkedElements, new DialogInterface.OnMultiChoiceClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            //Update the current item's checked status
+                            checkedElements[which] = isChecked;
+                        }
+                    });
+        }
 
         //Set positive button
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder)
+                        recyclerView.findViewHolderForAdapterPosition(position);
+                assert holder != null;
                 for (int i = 0; i<checkedElements.length; i++) {
                     boolean checked = checkedElements[i];
                     if (checked) {
-                        //elementsEditText.setText(getString(R.string.display_items, elements[i]));
+                        holder.getSecondaryTextView().append(elements[i] + ", ");
                     }
+                }
+                boolean allFalse = true;
+                for (boolean b : checkedElements) {
+                    if (b) {
+                        allFalse = false;
+                        break;
+                    }
+                }
+                if (allFalse) {
+                    holder.getSecondaryTextView().setText("");
                 }
             }
         });
