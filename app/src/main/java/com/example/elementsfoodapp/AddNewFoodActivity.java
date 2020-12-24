@@ -14,8 +14,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class AddNewFoodActivity extends AppCompatActivity
         implements CustomAdapter.ListItemClickListener {
 
@@ -51,10 +49,10 @@ public class AddNewFoodActivity extends AppCompatActivity
 
     @Override
     public void onListItemClick(View v, int position) {
-        openDialog(v, position);
+        openDialog(position);
     }
 
-    public void openDialog(View v, int position) {
+    public void openDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Setting AlertDialog Characteristics
@@ -76,15 +74,21 @@ public class AddNewFoodActivity extends AppCompatActivity
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                StringBuilder items = new StringBuilder();
                 CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder)
                         recyclerView.findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i<checkedElements.length; i++) {
                     boolean checked = checkedElements[i];
                     if (checked) {
-                        holder.getSecondaryTextView().append(elements[i] + ", ");
+                        items.append(elements[i]).append(", ");
                     }
                 }
+
+                if(items.length() > 2)
+                    items.deleteCharAt(items.length() - 2);
+                holder.getSecondaryTextView().setText(items.toString());
+
                 boolean allFalse = true;
                 for (boolean b : checkedElements) {
                     if (b) {
