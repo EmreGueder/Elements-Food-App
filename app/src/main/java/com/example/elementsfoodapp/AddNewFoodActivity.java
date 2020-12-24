@@ -56,7 +56,7 @@ public class AddNewFoodActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Setting AlertDialog Characteristics
-        builder.setTitle("Select items");
+        builder.setTitle("Suche Element aus");
 
         //Building the list to be shown in AlertDialog
         if(position == 1) {
@@ -68,39 +68,39 @@ public class AddNewFoodActivity extends AppCompatActivity
                             checkedElements[which] = isChecked;
                         }
                     });
+
+            //Set positive button
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    StringBuilder items = new StringBuilder();
+                    CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                            .findViewHolderForAdapterPosition(position);
+                    assert holder != null;
+                    for (int i = 0; i < checkedElements.length; i++) {
+                        boolean checked = checkedElements[i];
+                        if (checked) {
+                            items.append(elements[i]).append(", ");
+                        }
+                    }
+
+                    if (items.length() > 2)
+                        items.deleteCharAt(items.length() - 2);
+                    holder.getSecondaryTextView().setText(items.toString());
+
+                    boolean allFalse = true;
+                    for (boolean b : checkedElements) {
+                        if (b) {
+                            allFalse = false;
+                            break;
+                        }
+                    }
+                    if (allFalse) {
+                        holder.getSecondaryTextView().setText("");
+                    }
+                }
+            });
         }
-
-        //Set positive button
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                StringBuilder items = new StringBuilder();
-                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder)
-                        recyclerView.findViewHolderForAdapterPosition(position);
-                assert holder != null;
-                for (int i = 0; i<checkedElements.length; i++) {
-                    boolean checked = checkedElements[i];
-                    if (checked) {
-                        items.append(elements[i]).append(", ");
-                    }
-                }
-
-                if(items.length() > 2)
-                    items.deleteCharAt(items.length() - 2);
-                holder.getSecondaryTextView().setText(items.toString());
-
-                boolean allFalse = true;
-                for (boolean b : checkedElements) {
-                    if (b) {
-                        allFalse = false;
-                        break;
-                    }
-                }
-                if (allFalse) {
-                    holder.getSecondaryTextView().setText("");
-                }
-            }
-        });
 
         //Set negative button
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
