@@ -18,7 +18,10 @@ public class AddNewFoodActivity extends AppCompatActivity
         implements CustomAdapter.ListItemClickListener {
 
     private RecyclerView recyclerView;
+    private String[] foodType;
     private String[] elements;
+
+    private final boolean[] checkedFoodType = new boolean[14];
     private final boolean[] checkedElements = new boolean[]{false, false, false, false, false};
 
     //TextInputEditText elementsEditText;
@@ -35,8 +38,10 @@ public class AddNewFoodActivity extends AppCompatActivity
                 recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
         recyclerView.setAdapter(adapter);
+
         Resources res = getResources();
         elements = res.getStringArray(R.array.elements_array);
+        foodType = res.getStringArray(R.array.food_type_array);
         //elementsEditText = (TextInputEditText) findViewById(R.id.selectFoodElement);
     }
 
@@ -55,17 +60,73 @@ public class AddNewFoodActivity extends AppCompatActivity
     public void openDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        //Setting AlertDialog Characteristics
-        builder.setTitle("Suche Element aus");
-
         //Building the list to be shown in AlertDialog
-        if(position == 1) {
+        if (position == 0) {
+            //Setting AlertDialog Characteristics
+            builder.setTitle("Suche Lebensmittelart aus");
+
+            builder.setMultiChoiceItems(
+                    foodType, checkedFoodType, new DialogInterface.OnMultiChoiceClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            //Update the current item's checked status
+                            checkedFoodType[which] = isChecked;
+
+                            if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 1) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Maximal eine Art", Toast.LENGTH_SHORT).show();
+                                checkedFoodType[which] = false;
+                                ((AlertDialog) dialog).getListView().setItemChecked(
+                                        which, false);
+                            }
+                        }
+                    });
+
+            //Set positive button
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                            .findViewHolderForAdapterPosition(position);
+                    assert holder != null;
+                    for (int i = 0; i < checkedFoodType.length; i++) {
+                        boolean checked = checkedFoodType[i];
+                        if (checked) {
+                            holder.getSecondaryTextView().setText(foodType[i]);
+                        }
+                    }
+
+                    boolean allFalse = true;
+                    for (boolean b : checkedFoodType) {
+                        if (b) {
+                            allFalse = false;
+                            break;
+                        }
+                    }
+                    if (allFalse) {
+                        holder.getSecondaryTextView().setText("");
+                    }
+                }
+            });
+        }
+        else if (position == 1) {
+            //Setting AlertDialog Characteristics
+            builder.setTitle("Suche Element(e) aus");
+
             builder.setMultiChoiceItems(
                     elements, checkedElements, new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                             //Update the current item's checked status
                             checkedElements[which] = isChecked;
+
+                            if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 2) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Maximal 2 Elemente", Toast.LENGTH_SHORT).show();
+                                checkedElements[which] = false;
+                                ((AlertDialog) dialog).getListView().setItemChecked(
+                                        which, false);
+                            }
                         }
                     });
 
@@ -103,16 +164,17 @@ public class AddNewFoodActivity extends AppCompatActivity
         }
 
         //Set negative button
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                        "Abgebrochen", Toast.LENGTH_SHORT).show();
             }
         });
 
         //Creating AlertDialog
-        AlertDialog dialog = builder.create();
+        AlertDialog alertDialog = builder.create();
         //Displaying AlertDialog
-        dialog.show();
+        alertDialog.show();
     }
 }

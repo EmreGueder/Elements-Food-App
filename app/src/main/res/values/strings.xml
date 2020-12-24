@@ -9,11 +9,13 @@
     <string name="action_confirm">Confirm</string>
     <string name="add_food_name">Name des Lebensmittels</string>
     <string name="add_food_effect">Wirkung</string>
-    <string name="select_food_type">Food type</string>
-    <string name="select_food_element">Food element</string>
-    <string name="select_food_flavor">Food flavor</string>
-    <string name="select_food_temperature_behavior">Food temperature behavior</string>
-    <string name="select_food_target_organ">Food target organ</string>
+    <string-array name="food_properties_array">
+        <item>Lebensmittelart</item>
+        <item>Element</item>
+        <item>Geschmacksrichtung</item>
+        <item>Temperaturverhalten</item>
+        <item>Zielorgan</item>
+    </string-array>
     <string-array name="elements_array">
         <item>Holz</item>
         <item>Feuer</item>
@@ -21,11 +23,20 @@
         <item>Metall</item>
         <item>Wasser</item>
     </string-array>
-    <string-array name="food_properties_array">
-        <item>Lebensmittelart</item>
-        <item>Element</item>
-        <item>Geschmacksrichtung</item>
-        <item>Temperaturverhalten</item>
-        <item>Zielorgan</item>
+    <string-array name="food_type_array">
+        <item>Beeren und Früchte</item>
+        <item>Fisch und Meeresfrüchte</item>
+        <item>Fleisch</item>
+        <item>Gemüse</item>
+        <item>Getreide</item>
+        <item>Gewürze</item>
+        <item>Hülsenfrüchte</item>
+        <item>Kräuter</item>
+        <item>Milchprodukte</item>
+        <item>Nüsse und Samen</item>
+        <item>Öle und Fette</item>
+        <item>Feuer</item>
+        <item>Süßmittel</item>
+        <item>Sonstige</item>
     </string-array>
 </resources>
