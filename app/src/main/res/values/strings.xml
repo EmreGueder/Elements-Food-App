@@ -13,15 +13,8 @@
         <item>Lebensmittelart</item>
         <item>Element</item>
         <item>Geschmacksrichtung</item>
-        <item>Temperaturverhalten</item>
+        <item>Thermische Wirkung</item>
         <item>Zielorgan</item>
-    </string-array>
-    <string-array name="elements_array">
-        <item>Holz</item>
-        <item>Feuer</item>
-        <item>Erde</item>
-        <item>Metall</item>
-        <item>Wasser</item>
     </string-array>
     <string-array name="food_type_array">
         <item>Beeren und Früchte</item>
@@ -38,5 +31,39 @@
         <item>Feuer</item>
         <item>Süßmittel</item>
         <item>Sonstige</item>
+    </string-array>
+    <string-array name="food_elements_array">
+        <item>Holz</item>
+        <item>Feuer</item>
+        <item>Erde</item>
+        <item>Metall</item>
+        <item>Wasser</item>
+    </string-array>
+    <string-array name="food_flavor_array">
+        <item>Bitter</item>
+        <item>Salzig</item>
+        <item>Sauer</item>
+        <item>Scharf</item>
+        <item>Süß</item>
+    </string-array>
+    <string-array name="food_temp_behavior_array">
+        <item>Erfrischend</item>
+        <item>Heiß</item>
+        <item>Kalt</item>
+        <item>Neutral</item>
+        <item>Warm</item>
+    </string-array>
+    <string-array name="food_target_organ">
+        <item>Blase</item>
+        <item>Dickdarm</item>
+        <item>Dünndarm</item>
+        <item>Gallenblase</item>
+        <item>Herz</item>
+        <item>Leber</item>
+        <item>Lunge</item>
+        <item>Magen</item>
+        <item>Malz</item>
+        <item>Milz</item>
+        <item>Niere</item>
     </string-array>
 </resources>

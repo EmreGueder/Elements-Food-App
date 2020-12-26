@@ -19,10 +19,17 @@ public class AddNewFoodActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private String[] foodType;
-    private String[] elements;
+    private String[] foodElements;
+    private String[] foodFlavor;
+    private String[] foodTempBehavior;
+    private String[] foodTargetOrgan;
 
     private final boolean[] checkedFoodType = new boolean[14];
-    private final boolean[] checkedElements = new boolean[]{false, false, false, false, false};
+    private final boolean[] checkedFoodElements = new boolean[5];
+    private final boolean[] checkedFoodFlavor = new boolean[5];
+    private final boolean[] checkedFoodTempBehavior = new boolean[5];
+    private final boolean[] checkedFoodTargetOrgan = new boolean[11];
+
 
     //TextInputEditText elementsEditText;
 
@@ -40,8 +47,11 @@ public class AddNewFoodActivity extends AppCompatActivity
         recyclerView.setAdapter(adapter);
 
         Resources res = getResources();
-        elements = res.getStringArray(R.array.elements_array);
         foodType = res.getStringArray(R.array.food_type_array);
+        foodElements = res.getStringArray(R.array.food_elements_array);
+        foodFlavor = res.getStringArray(R.array.food_flavor_array);
+        foodTempBehavior = res.getStringArray(R.array.food_temp_behavior_array);
+        foodTargetOrgan = res.getStringArray(R.array.food_target_organ);
         //elementsEditText = (TextInputEditText) findViewById(R.id.selectFoodElement);
     }
 
@@ -63,7 +73,7 @@ public class AddNewFoodActivity extends AppCompatActivity
         //Building the list to be shown in AlertDialog
         if (position == 0) {
             //Setting AlertDialog Characteristics
-            builder.setTitle("Suche Lebensmittelart aus");
+            builder.setTitle("Wähle Lebensmittelart aus");
 
             builder.setMultiChoiceItems(
                     foodType, checkedFoodType, (dialog, which, isChecked) -> {
@@ -105,17 +115,17 @@ public class AddNewFoodActivity extends AppCompatActivity
         }
         else if (position == 1) {
             //Setting AlertDialog Characteristics
-            builder.setTitle("Suche Element(e) aus");
+            builder.setTitle("Wähle Element(e) aus");
 
             builder.setMultiChoiceItems(
-                    elements, checkedElements, (dialog, which, isChecked) -> {
+                    foodElements, checkedFoodElements, (dialog, which, isChecked) -> {
                         //Update the current item's checked status
-                        checkedElements[which] = isChecked;
+                        checkedFoodElements[which] = isChecked;
 
                         if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 2) {
                             Toast.makeText(getApplicationContext(),
                                     "Maximal 2 Elemente", Toast.LENGTH_SHORT).show();
-                            checkedElements[which] = false;
+                            checkedFoodElements[which] = false;
                             ((AlertDialog) dialog).getListView().setItemChecked(
                                     which, false);
                         }
@@ -127,19 +137,156 @@ public class AddNewFoodActivity extends AppCompatActivity
                 CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
-                for (int i = 0; i < checkedElements.length; i++) {
-                    boolean checked = checkedElements[i];
+                for (int i = 0; i < checkedFoodElements.length; i++) {
+                    boolean checked = checkedFoodElements[i];
                     if (checked) {
-                        items.append(elements[i]).append(", ");
+                        items.append(foodElements[i]).append(", ");
                     }
                 }
-
+                // Delete last comma
                 if (items.length() > 2)
                     items.deleteCharAt(items.length() - 2);
                 holder.getSecondaryTextView().setText(items.toString());
 
                 boolean allFalse = true;
-                for (boolean b : checkedElements) {
+                for (boolean b : checkedFoodElements) {
+                    if (b) {
+                        allFalse = false;
+                        break;
+                    }
+                }
+                if (allFalse) {
+                    holder.getSecondaryTextView().setText("");
+                }
+            });
+        }
+        else if (position == 2) {
+            //Setting AlertDialog Characteristics
+            builder.setTitle("Wähle Geschmacksrichtung(en) aus");
+
+            builder.setMultiChoiceItems(
+                    foodFlavor, checkedFoodFlavor, (dialog, which, isChecked) -> {
+                        //Update the current item's checked status
+                        checkedFoodFlavor[which] = isChecked;
+
+                        if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 2) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Maximal 2 Geschmacksrichtungen", Toast.LENGTH_SHORT)
+                                    .show();
+                            checkedFoodFlavor[which] = false;
+                            ((AlertDialog) dialog).getListView().setItemChecked(
+                                    which, false);
+                        }
+                    });
+
+            //Set positive button
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                StringBuilder items = new StringBuilder();
+                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                        .findViewHolderForAdapterPosition(position);
+                assert holder != null;
+                for (int i = 0; i < checkedFoodFlavor.length; i++) {
+                    boolean checked = checkedFoodFlavor[i];
+                    if (checked) {
+                        items.append(foodFlavor[i]).append(", ");
+                    }
+                }
+                // Delete last comma
+                if (items.length() > 2)
+                    items.deleteCharAt(items.length() - 2);
+                holder.getSecondaryTextView().setText(items.toString());
+
+                boolean allFalse = true;
+                for (boolean b : checkedFoodFlavor) {
+                    if (b) {
+                        allFalse = false;
+                        break;
+                    }
+                }
+                if (allFalse) {
+                    holder.getSecondaryTextView().setText("");
+                }
+            });
+        }
+        else if (position == 3) {
+            //Setting AlertDialog Characteristics
+            builder.setTitle("Wähle thermische Wirkung(en) aus");
+
+            builder.setMultiChoiceItems(
+                    foodTempBehavior, checkedFoodTempBehavior, (dialog, which, isChecked) -> {
+                        //Update the current item's checked status
+                        checkedFoodTempBehavior[which] = isChecked;
+
+                        if (((AlertDialog) dialog).getListView().getCheckedItemCount() > 2) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Maximal 2 thermische Wirkungen", Toast.LENGTH_SHORT)
+                                    .show();
+                            checkedFoodTempBehavior[which] = false;
+                            ((AlertDialog) dialog).getListView().setItemChecked(
+                                    which, false);
+                        }
+                    });
+
+            //Set positive button
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                StringBuilder items = new StringBuilder();
+                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                        .findViewHolderForAdapterPosition(position);
+                assert holder != null;
+                for (int i = 0; i < checkedFoodTempBehavior.length; i++) {
+                    boolean checked = checkedFoodTempBehavior[i];
+                    if (checked) {
+                        items.append(foodTempBehavior[i]).append(", ");
+                    }
+                }
+
+                // Delete last comma
+                if (items.length() > 2)
+                    items.deleteCharAt(items.length() - 2);
+                holder.getSecondaryTextView().setText(items.toString());
+
+                boolean allFalse = true;
+                for (boolean b : checkedFoodTempBehavior) {
+                    if (b) {
+                        allFalse = false;
+                        break;
+                    }
+                }
+                if (allFalse) {
+                    holder.getSecondaryTextView().setText("");
+                }
+            });
+        }
+        else if (position == 4) {
+            //Setting AlertDialog Characteristics
+            builder.setTitle("Wähle Zielorgan(e) aus");
+
+            builder.setMultiChoiceItems(
+                    foodTargetOrgan, checkedFoodTargetOrgan, (dialog, which, isChecked) -> {
+                        //Update the current item's checked status
+                        checkedFoodTargetOrgan[which] = isChecked;
+                    });
+
+            //Set positive button
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                StringBuilder items = new StringBuilder();
+                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                        .findViewHolderForAdapterPosition(position);
+                assert holder != null;
+                for (int i = 0; i < checkedFoodTargetOrgan.length; i++) {
+                    boolean checked = checkedFoodTargetOrgan[i];
+                    if (checked) {
+                        items.append(foodTargetOrgan[i]).append(", ");
+                    }
+                }
+
+                // Delete last comma
+                if (items.length() > 2)
+                    items.deleteCharAt(items.length() - 2);
+                holder.getSecondaryTextView().setText(items.toString());
+
+                boolean allFalse = true;
+                for (boolean b : checkedFoodTargetOrgan) {
                     if (b) {
                         allFalse = false;
                         break;
