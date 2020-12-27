@@ -5,7 +5,7 @@
     <string name="title_categories">Categories</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Search …</string>
-    <string name="add_new_food">Add new food</string>
+    <string name="title_add_new_food">Add new food</string>
     <string name="action_confirm">Confirm</string>
     <string name="add_food_name">Name des Lebensmittels</string>
     <string name="add_food_effect">Wirkung</string>

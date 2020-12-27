@@ -11,13 +11,19 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class AddNewFoodActivity extends AppCompatActivity
         implements CustomAdapter.ListItemClickListener {
 
     private RecyclerView recyclerView;
+    private CustomAdapter.ViewHolder holder;
+    private TextInputEditText addFoodName;
+    private TextInputEditText addFoodEffect;
     private String[] foodType;
     private String[] foodElements;
     private String[] foodFlavor;
@@ -52,13 +58,39 @@ public class AddNewFoodActivity extends AppCompatActivity
         foodFlavor = res.getStringArray(R.array.food_flavor_array);
         foodTempBehavior = res.getStringArray(R.array.food_temp_behavior_array);
         foodTargetOrgan = res.getStringArray(R.array.food_target_organ);
-        //elementsEditText = (TextInputEditText) findViewById(R.id.selectFoodElement);
+        addFoodName = (TextInputEditText) findViewById(R.id.addFoodName);
+        addFoodEffect = (TextInputEditText) findViewById(R.id.addFoodEffect);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.add_new_food_options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_confirm) {
+            if (addFoodName.getText().toString().isEmpty() ||
+                    addFoodEffect.getText().toString().isEmpty()) {
+                Toast.makeText(getApplicationContext(),
+                        "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                for (int i = 0; i < 5; i++) {
+                    holder = (CustomAdapter.ViewHolder) recyclerView
+                            .findViewHolderForAdapterPosition(i);
+                    if(holder.getSecondaryTextView().getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(),
+                                "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
+            }
+        }
         return true;
     }
 
@@ -91,7 +123,7 @@ public class AddNewFoodActivity extends AppCompatActivity
 
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
-                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (CustomAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodType.length; i++) {
@@ -134,7 +166,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (CustomAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodElements.length; i++) {
@@ -182,7 +214,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (CustomAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodFlavor.length; i++) {
@@ -230,7 +262,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (CustomAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodTempBehavior.length; i++) {
@@ -270,7 +302,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                CustomAdapter.ViewHolder holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (CustomAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodTargetOrgan.length; i++) {

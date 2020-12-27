@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElementsFoodApp">
         <activity android:name=".AddNewFoodActivity"
-                  android:label="@string/add_new_food">
+                  android:label="@string/title_add_new_food">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

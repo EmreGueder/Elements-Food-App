@@ -66,6 +66,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.search) {
             searchView.setIconified(false);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }
