@@ -31,7 +31,7 @@ public class CategoriesFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(@NotNull Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_categories_menu, menu);
     }
 }
