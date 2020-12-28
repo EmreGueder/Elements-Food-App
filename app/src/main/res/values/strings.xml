@@ -9,6 +9,7 @@
     <string name="action_confirm">Confirm</string>
     <string name="add_food_name">Name des Lebensmittels</string>
     <string name="add_food_effect">Wirkung</string>
+    <string name="title_filter">Filter</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>

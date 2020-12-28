@@ -36,9 +36,6 @@ public class AddNewFoodActivity extends AppCompatActivity
     private final boolean[] checkedFoodTempBehavior = new boolean[5];
     private final boolean[] checkedFoodTargetOrgan = new boolean[11];
 
-
-    //TextInputEditText elementsEditText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +88,7 @@ public class AddNewFoodActivity extends AppCompatActivity
                 }
             }
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -100,10 +97,16 @@ public class AddNewFoodActivity extends AppCompatActivity
     }
 
     public void openDialog(int position) {
+        final int FOOD_TYPE = 0;
+        final int FOOD_ELEMENTS = 1;
+        final int FOOD_FLAVOR = 2;
+        final int FOOD_TEMP_BEHAVIOR = 3;
+        final int FOOD_TARGET_ORGAN = 4;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Building the list to be shown in AlertDialog
-        if (position == 0) {
+        if (position == FOOD_TYPE) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle Lebensmittelart aus");
 
@@ -145,7 +148,7 @@ public class AddNewFoodActivity extends AppCompatActivity
                 }
             });
         }
-        else if (position == 1) {
+        else if (position == FOOD_ELEMENTS) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle Element(e) aus");
 
@@ -192,7 +195,7 @@ public class AddNewFoodActivity extends AppCompatActivity
                 }
             });
         }
-        else if (position == 2) {
+        else if (position == FOOD_FLAVOR) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle Geschmacksrichtung(en) aus");
 
@@ -240,7 +243,7 @@ public class AddNewFoodActivity extends AppCompatActivity
                 }
             });
         }
-        else if (position == 3) {
+        else if (position == FOOD_TEMP_BEHAVIOR) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle thermische Wirkung(en) aus");
 
@@ -289,7 +292,7 @@ public class AddNewFoodActivity extends AppCompatActivity
                 }
             });
         }
-        else if (position == 4) {
+        else if (position == FOOD_TARGET_ORGAN) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle Zielorgan(e) aus");
 
