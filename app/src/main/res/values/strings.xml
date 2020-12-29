@@ -10,6 +10,50 @@
     <string name="add_food_name">Name des Lebensmittels</string>
     <string name="add_food_effect">Wirkung</string>
     <string name="title_filter">Filter</string>
+    <string name="text_filter_wood">Holz</string>
+    <string name="text_filter_fire">Feuer</string>
+    <string name="text_filter_earth">Erde</string>
+    <string name="text_filter_metal">Metall</string>
+    <string name="text_filter_water">Wasser</string>
+    <string name="chips_title_text_element">Elemente</string>
+    <string name="chips_title_text_type">Lebensmittelart</string>
+    <string name="text_filter_fruits">Beeren und Früchte</string>
+    <string name="text_filter_fish">Fisch und Meeresfrüchte</string>
+    <string name="text_filter_meat">Fleisch</string>
+    <string name="text_filter_vegetable">Gemüse</string>
+    <string name="text_filter_grain">Getreide</string>
+    <string name="text_filter_spices">Gewürze</string>
+    <string name="text_filter_legumes">Hülsenfrüchte</string>
+    <string name="text_filter_herbs">Kräuter</string>
+    <string name="text_filter_dairy">Milchprodukte</string>
+    <string name="text_filter_nuts">Nüsse und Samen</string>
+    <string name="text_filter_oil">Öle und Fette</string>
+    <string name="text_filter_sweetener">Süßmittel</string>
+    <string name="text_filter_other">Sonstige</string>
+    <string name="chips_title_text_flavor">Geschmacksrichtung</string>
+    <string name="text_filter_bitter">Bitter</string>
+    <string name="text_filter_salty">Salzig</string>
+    <string name="text_filter_sour">Sauer</string>
+    <string name="text_filter_spicy">Scharf</string>
+    <string name="text_filter_sweet">Süß</string>
+    <string name="chips_title_text_thermal">Thermische Wirkung</string>
+    <string name="text_filter_refreshing">Erfrischend</string>
+    <string name="text_filter_hot">Heiß</string>
+    <string name="text_filter_cold">Kalt</string>
+    <string name="text_filter_neutral">Neutral</string>
+    <string name="text_filter_warm">Warm</string>
+    <string name="chips_title_text_organ">Zielorgan</string>
+    <string name="text_filter_bladder">Blase</string>
+    <string name="text_filter_intestineL">Dickdarm</string>
+    <string name="text_filter_intestineS">Dünndarm</string>
+    <string name="text_filter_gallbladder">Gallenblase</string>
+    <string name="text_filter_heart">Herz</string>
+    <string name="text_filter_liver">Leber</string>
+    <string name="text_filter_lung">Lunge</string>
+    <string name="text_filter_stomach">Magen</string>
+    <string name="text_filter_malt">Malz</string>
+    <string name="text_filter_spleen">Milz</string>
+    <string name="text_filter_kidney">Niere</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>
@@ -29,7 +73,6 @@
         <item>Milchprodukte</item>
         <item>Nüsse und Samen</item>
         <item>Öle und Fette</item>
-        <item>Feuer</item>
         <item>Süßmittel</item>
         <item>Sonstige</item>
     </string-array>

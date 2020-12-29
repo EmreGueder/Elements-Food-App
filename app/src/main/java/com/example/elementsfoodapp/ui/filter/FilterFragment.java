@@ -35,4 +35,9 @@ public class FilterFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 }

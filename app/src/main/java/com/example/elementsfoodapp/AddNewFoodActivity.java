@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.jetbrains.annotations.NotNull;
+
 public class AddNewFoodActivity extends AppCompatActivity
         implements CustomAdapter.ListItemClickListener {
 
@@ -67,7 +69,7 @@ public class AddNewFoodActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_confirm) {
