@@ -1,4 +1,4 @@
-package com.example.elementsfoodapp;
+package com.example.elementsfoodapp.ui.addnewfood;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.elementsfoodapp.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
@@ -64,7 +65,7 @@ public class AddNewFoodActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_new_food_options_menu, menu);
+        inflater.inflate(R.menu.add_new_food_menu, menu);
         return true;
     }
 

@@ -17,10 +17,10 @@
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
 
-    <fragment
+    <activity
         android:id="@+id/navigation_categories"
-        android:name="com.example.elementsfoodapp.ui.categories.CategoriesFragment"
+        android:name="com.example.elementsfoodapp.ui.categories.CategoriesActivity"
         android:label="@string/title_categories"
-        tools:layout="@layout/fragment_categories"/>
+        tools:layout="@layout/activity_categories"/>
 
 </navigation>

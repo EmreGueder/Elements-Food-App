@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.elementsfoodapp.AddNewFoodActivity;
+import com.example.elementsfoodapp.ui.addnewfood.AddNewFoodActivity;
 import com.example.elementsfoodapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
