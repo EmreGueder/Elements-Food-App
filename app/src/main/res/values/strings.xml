@@ -54,6 +54,8 @@
     <string name="text_filter_malt">Malz</string>
     <string name="text_filter_spleen">Milz</string>
     <string name="text_filter_kidney">Niere</string>
+    <string name="filter_title">Filter</string>
+    <string name="hideArrow">Hide</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>

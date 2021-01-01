@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -20,7 +21,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 public class CategoriesActivity extends AppCompatActivity {
 
     private SearchView searchView;
-    private LinearLayout bottomSheet;
     private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
 
     @Override
@@ -28,7 +28,8 @@ public class CategoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
-        bottomSheet = findViewById(R.id.bottomSheetFilter);
+        ImageView hideArrow = findViewById(R.id.bottomSheetHideArrow);
+        LinearLayout bottomSheet = findViewById(R.id.bottomSheetFilter);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
@@ -55,6 +56,9 @@ public class CategoriesActivity extends AppCompatActivity {
 
             }
         });
+
+        hideArrow.setOnClickListener(v ->
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
     }
 
     @Override

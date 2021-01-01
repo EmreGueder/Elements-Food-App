@@ -10,6 +10,31 @@
     app:behavior_skipCollapsed="true"
     android:id="@+id/bottomSheetFilter">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/bottomSheetHideArrow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24"
+            android:contentDescription="@string/hideArrow"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:text="@string/filter_title"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textStyle="normal" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/chips_title_type"
         android:layout_width="wrap_content"
@@ -441,4 +466,5 @@
     <View style="@style/Spacer"/>
 
     <View style="@style/Divider"/>
+
 </LinearLayout>
