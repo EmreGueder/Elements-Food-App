@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/bottomSheetFilter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="16dp"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:orientation="vertical"
     app:behavior_hideable="true"
     app:behavior_skipCollapsed="true"
-    android:id="@+id/bottomSheetFilter">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,10 +20,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24"
-            android:contentDescription="@string/hideArrow"
             android:clickable="true"
-            android:focusable="true" />
+            android:contentDescription="@string/hideArrow"
+            android:focusable="true"
+            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,10 +50,10 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.ChipGroup
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            app:singleSelection="true"
-            app:singleLine="true">
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_fruits"
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_fruits"/>
+                android:text="@string/text_filter_fruits" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_fish"
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_meat"/>
+                android:text="@string/text_filter_meat" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_vegetable"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_vegetable"/>
+                android:text="@string/text_filter_vegetable" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_grain"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_grain"/>
+                android:text="@string/text_filter_grain" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_spices"
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_spices"/>
+                android:text="@string/text_filter_spices" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_legumes"
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_legumes"/>
+                android:text="@string/text_filter_legumes" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_herbs"
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_herbs"/>
+                android:text="@string/text_filter_herbs" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_dairy"
@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_dairy"/>
+                android:text="@string/text_filter_dairy" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_nuts"
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_nuts"/>
+                android:text="@string/text_filter_nuts" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_oil"
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_oil"/>
+                android:text="@string/text_filter_oil" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_sweetener"
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_sweetener"/>
+                android:text="@string/text_filter_sweetener" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_other"
@@ -157,16 +157,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_other"/>
+                android:text="@string/text_filter_other" />
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
-    <View style="@style/Divider"/>
+    <View style="@style/Divider" />
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
     <TextView
         android:id="@+id/chips_title_element"
@@ -224,11 +224,11 @@
             android:text="@string/text_filter_water" />
     </com.google.android.material.chip.ChipGroup>
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
-    <View style="@style/Divider"/>
+    <View style="@style/Divider" />
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
     <TextView
         android:id="@+id/chips_title_flavor"
@@ -241,8 +241,8 @@
         android:textStyle="bold" />
 
     <com.google.android.material.chip.ChipGroup
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
@@ -251,7 +251,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_bitter"/>
+            android:text="@string/text_filter_bitter" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_salty"
@@ -267,7 +267,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_sour"/>
+            android:text="@string/text_filter_sour" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_spicy"
@@ -275,7 +275,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_spicy"/>
+            android:text="@string/text_filter_spicy" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_sweet"
@@ -283,14 +283,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_sweet"/>
+            android:text="@string/text_filter_sweet" />
     </com.google.android.material.chip.ChipGroup>
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
-    <View style="@style/Divider"/>
+    <View style="@style/Divider" />
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
     <TextView
         android:id="@+id/chips_title_thermal"
@@ -303,8 +303,8 @@
         android:textStyle="bold" />
 
     <com.google.android.material.chip.ChipGroup
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
@@ -313,7 +313,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_refreshing"/>
+            android:text="@string/text_filter_refreshing" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_hot"
@@ -329,7 +329,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_cold"/>
+            android:text="@string/text_filter_cold" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_neutral"
@@ -337,7 +337,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_neutral"/>
+            android:text="@string/text_filter_neutral" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_warm"
@@ -345,14 +345,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/text_filter_warm"/>
+            android:text="@string/text_filter_warm" />
     </com.google.android.material.chip.ChipGroup>
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
-    <View style="@style/Divider"/>
+    <View style="@style/Divider" />
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
     <TextView
         android:id="@+id/chips_title_organ"
@@ -369,8 +369,8 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.ChipGroup
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
@@ -379,7 +379,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_bladder"/>
+                android:text="@string/text_filter_bladder" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_intestineL"
@@ -395,7 +395,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_intestineS"/>
+                android:text="@string/text_filter_intestineS" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_gallbladder"
@@ -403,7 +403,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_gallbladder"/>
+                android:text="@string/text_filter_gallbladder" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_heart"
@@ -411,7 +411,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_heart"/>
+                android:text="@string/text_filter_heart" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_liver"
@@ -419,7 +419,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_liver"/>
+                android:text="@string/text_filter_liver" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_lung"
@@ -427,7 +427,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_lung"/>
+                android:text="@string/text_filter_lung" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_stomach"
@@ -435,7 +435,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_stomach"/>
+                android:text="@string/text_filter_stomach" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_malt"
@@ -443,7 +443,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_malt"/>
+                android:text="@string/text_filter_malt" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_spleen"
@@ -451,7 +451,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_spleen"/>
+                android:text="@string/text_filter_spleen" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_kidney"
@@ -459,12 +459,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/text_filter_kidney"/>
+                android:text="@string/text_filter_kidney" />
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
-    <View style="@style/Spacer"/>
+    <View style="@style/Spacer" />
 
-    <View style="@style/Divider"/>
+    <View style="@style/Divider" />
 
 </LinearLayout>
