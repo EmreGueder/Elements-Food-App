@@ -18,6 +18,8 @@ import android.widget.SearchView;
 import com.example.elementsfoodapp.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import org.jetbrains.annotations.NotNull;
+
 public class CategoriesActivity extends AppCompatActivity {
 
     private SearchView searchView;
@@ -78,7 +80,7 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
         //Required for SearchView to gain focus,
         //resulting the keyboard to show up after tapping the search icon
