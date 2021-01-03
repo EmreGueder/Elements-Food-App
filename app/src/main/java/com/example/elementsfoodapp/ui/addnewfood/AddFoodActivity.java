@@ -20,11 +20,11 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
-public class AddNewFoodActivity extends AppCompatActivity
-        implements CustomAdapter.ListItemClickListener {
+public class AddFoodActivity extends AppCompatActivity
+        implements AddFoodAdapter.ListItemClickListener {
 
     private RecyclerView recyclerView;
-    private CustomAdapter.ViewHolder holder;
+    private AddFoodAdapter.ViewHolder holder;
     private TextInputEditText addFoodName;
     private TextInputEditText addFoodEffect;
     private String[] foodType;
@@ -44,7 +44,7 @@ public class AddNewFoodActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_food);
 
-        CustomAdapter adapter = new CustomAdapter(this, this);
+        AddFoodAdapter adapter = new AddFoodAdapter(this, this);
         recyclerView = findViewById(R.id.foodPropertiesView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(
@@ -81,7 +81,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             }
             else {
                 for (int i = 0; i < 5; i++) {
-                    holder = (CustomAdapter.ViewHolder) recyclerView
+                    holder = (AddFoodAdapter.ViewHolder) recyclerView
                             .findViewHolderForAdapterPosition(i);
                     if(holder.getSecondaryTextView().getText().toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(),
@@ -129,7 +129,7 @@ public class AddNewFoodActivity extends AppCompatActivity
 
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
-                holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (AddFoodAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodType.length; i++) {
@@ -172,7 +172,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (AddFoodAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodElements.length; i++) {
@@ -220,7 +220,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (AddFoodAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodFlavor.length; i++) {
@@ -268,7 +268,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (AddFoodAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodTempBehavior.length; i++) {
@@ -308,7 +308,7 @@ public class AddNewFoodActivity extends AppCompatActivity
             //Set positive button
             builder.setPositiveButton("OK", (dialog, which) -> {
                 StringBuilder items = new StringBuilder();
-                holder = (CustomAdapter.ViewHolder) recyclerView
+                holder = (AddFoodAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(position);
                 assert holder != null;
                 for (int i = 0; i < checkedFoodTargetOrgan.length; i++) {

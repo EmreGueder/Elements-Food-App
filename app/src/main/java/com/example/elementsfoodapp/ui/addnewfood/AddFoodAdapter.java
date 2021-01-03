@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elementsfoodapp.R;
 
-public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AddFoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static ListItemClickListener mOnClickListener;
     private final String[] foodProperties;
@@ -47,7 +47,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         void onListItemClick(View v, int position);
     }
 
-    public CustomAdapter(Context context, ListItemClickListener onClickListener) {
+    public AddFoodAdapter(Context context, ListItemClickListener onClickListener) {
         Resources res = context.getResources();
         foodProperties = res.getStringArray(R.array.food_properties_array);
         mOnClickListener = onClickListener;

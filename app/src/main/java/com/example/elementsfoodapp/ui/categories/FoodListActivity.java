@@ -20,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import org.jetbrains.annotations.NotNull;
 
-public class CategoriesActivity extends AppCompatActivity {
+public class FoodListActivity extends AppCompatActivity {
 
     private SearchView searchView;
     private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;

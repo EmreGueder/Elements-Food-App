@@ -19,7 +19,7 @@
 
     <activity
         android:id="@+id/navigation_categories"
-        android:name="com.example.elementsfoodapp.ui.categories.CategoriesActivity"
+        android:name="com.example.elementsfoodapp.ui.categories.FoodListActivity"
         android:label="@string/title_categories"
         tools:layout="@layout/activity_categories"/>
 

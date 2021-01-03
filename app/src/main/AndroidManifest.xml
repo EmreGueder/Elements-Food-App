@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElementsFoodApp">
 
-        <activity android:name=".ui.categories.CategoriesActivity"
+        <activity android:name=".ui.categories.FoodListActivity"
                   android:label="@string/title_categories">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".ui.addnewfood.AddNewFoodActivity"
+        <activity android:name=".ui.addnewfood.AddFoodActivity"
                   android:label="@string/title_add_new_food">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
