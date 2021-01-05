@@ -56,6 +56,7 @@
     <string name="text_filter_kidney">Niere</string>
     <string name="filter_title">Filter</string>
     <string name="hideArrow">Hide</string>
+    <string name="clear_all_data">Clear all data</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>

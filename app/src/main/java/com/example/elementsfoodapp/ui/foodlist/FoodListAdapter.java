@@ -1,4 +1,4 @@
-package com.example.elementsfoodapp.ui.categories;
+package com.example.elementsfoodapp.ui.foodlist;
 
 import android.content.Context;
 import android.view.LayoutInflater;

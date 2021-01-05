@@ -1,4 +1,4 @@
-package com.example.elementsfoodapp.ui.categories;
+package com.example.elementsfoodapp.ui.foodlist;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.elementsfoodapp.Food;
 import com.example.elementsfoodapp.R;
@@ -103,7 +104,7 @@ public class FoodListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.categories_menu, menu);
+        inflater.inflate(R.menu.food_list_menu, menu);
 
         //Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -123,6 +124,7 @@ public class FoodListActivity extends AppCompatActivity {
         //resulting the keyboard to show up after tapping the search icon
         if (id == R.id.search) {
             searchView.setIconified(false);
+            return true;
         }
         else if (id == R.id.filter) {
             if (getSupportActionBar() != null) {
@@ -131,6 +133,16 @@ public class FoodListActivity extends AppCompatActivity {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             recyclerView.setVisibility(View.INVISIBLE);
             fab.setVisibility(View.INVISIBLE);
+            return true;
+        }
+        else if (id == R.id.clear_data) {
+            // Add a toast just for confirmation
+            Toast.makeText(this, "Clearing the data...",
+                    Toast.LENGTH_SHORT).show();
+
+            // Delete the existing data
+            mFoodViewModel.deleteAll();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -139,6 +151,7 @@ public class FoodListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Extract StringArray Data and insert into Database
             String[] foodData = data.getStringArrayExtra(AddFoodActivity.EXTRA_REPLY);
             Food food = new Food(foodData[0], foodData[1], foodData[2], foodData[3],
                                  foodData[4], foodData[5], foodData[6]);

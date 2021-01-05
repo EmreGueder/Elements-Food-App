@@ -20,22 +20,21 @@ public abstract class FoodRoomDatabase extends RoomDatabase {
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+    private static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
 
-            // If you want to keep data through app restarts,
-            // comment out the following block
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more foods, just add them.
+                // If we have no foods, then create initial food(s).
                 FoodDao dao = INSTANCE.foodDao();
-                dao.deleteAll();
-
-                Food food = new Food("Apfel", "test", "test","test",
-                        "test","test","test");
-                dao.insert(food);
+                if (dao.getAnyFood().length < 1) {
+                    Food food = new Food("Apfel", "test", "test","test",
+                            "test","test","test");
+                    dao.insert(food);
+                }
             });
         }
     };

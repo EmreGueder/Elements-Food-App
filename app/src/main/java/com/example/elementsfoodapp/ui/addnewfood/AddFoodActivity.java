@@ -106,6 +106,7 @@ public class AddFoodActivity extends AppCompatActivity
             replyIntent.putExtra(EXTRA_REPLY, foodData);
             setResult(RESULT_OK, replyIntent);
             finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

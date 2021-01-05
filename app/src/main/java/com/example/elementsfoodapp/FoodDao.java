@@ -3,6 +3,7 @@ package com.example.elementsfoodapp;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface FoodDao {
 
     // @Update and @Delete available
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Food food);
 
     @Query("DELETE FROM food_table")
@@ -20,4 +21,7 @@ public interface FoodDao {
 
     @Query("SELECT * from food_table ORDER BY food ASC")
     LiveData<List<Food>> getAllFoods();
+
+    @Query("SELECT * from food_table LIMIT 1")
+    Food[] getAnyFood();
 }

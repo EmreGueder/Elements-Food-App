@@ -24,4 +24,10 @@ public class FoodRepository {
             mFoodDao.insert(food);
         });
     }
+
+    public void deleteAll() {
+        FoodRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mFoodDao.deleteAll();
+        });
+    }
 }

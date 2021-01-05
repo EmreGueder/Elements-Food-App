@@ -1,4 +1,4 @@
-package com.example.elementsfoodapp.ui.categories;
+package com.example.elementsfoodapp.ui.foodlist;
 
 import android.app.Application;
 
@@ -25,4 +25,6 @@ public class FoodViewModel extends AndroidViewModel {
     public LiveData<List<Food>> getAllFoods() { return mAllFoods; }
 
     public void insert(Food food) { mRepository.insert(food); }
+
+    public void deleteAll() { mRepository.deleteAll(); }
 }
