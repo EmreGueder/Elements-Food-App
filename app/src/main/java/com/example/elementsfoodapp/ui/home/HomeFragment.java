@@ -20,11 +20,6 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), AddFoodActivity.class);
-            v.getContext().startActivity(intent);
-        });
         return root;
     }
 }

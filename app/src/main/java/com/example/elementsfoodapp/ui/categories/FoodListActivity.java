@@ -24,6 +24,7 @@ import com.example.elementsfoodapp.Food;
 import com.example.elementsfoodapp.R;
 import com.example.elementsfoodapp.ui.addnewfood.AddFoodActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +34,7 @@ public class FoodListActivity extends AppCompatActivity {
 
     public static final int ADD_FOOD_ACTIVITY_REQUEST_CODE = 1;
 
+    private FloatingActionButton fab;
     private FoodViewModel mFoodViewModel;
     private RecyclerView recyclerView;
     private SearchView searchView;
@@ -42,6 +44,12 @@ public class FoodListActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(FoodListActivity.this, AddFoodActivity.class);
+            startActivityForResult(intent, ADD_FOOD_ACTIVITY_REQUEST_CODE);
+        });
 
         recyclerView = findViewById(R.id.foodListRecyclerView);
         final FoodListAdapter adapter = new FoodListAdapter(this);
@@ -70,6 +78,7 @@ public class FoodListActivity extends AppCompatActivity {
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().show();
                             recyclerView.setVisibility(View.VISIBLE);
+                            fab.setVisibility(View.VISIBLE);
                         }
                         break;
                     case BottomSheetBehavior.STATE_EXPANDED:
@@ -121,6 +130,7 @@ public class FoodListActivity extends AppCompatActivity {
             }
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             recyclerView.setVisibility(View.INVISIBLE);
+            fab.setVisibility(View.INVISIBLE);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,7 +142,7 @@ public class FoodListActivity extends AppCompatActivity {
             String[] foodData = data.getStringArrayExtra(AddFoodActivity.EXTRA_REPLY);
             Food food = new Food(foodData[0], foodData[1], foodData[2], foodData[3],
                                  foodData[4], foodData[5], foodData[6]);
-            mFoodViewModel.insert(food); //parentactivity is foodlistactivity instead of mainactivity
+            mFoodViewModel.insert(food);
         }
     }
 }
