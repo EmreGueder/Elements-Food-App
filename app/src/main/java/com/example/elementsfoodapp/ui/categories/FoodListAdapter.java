@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.elementsfoodapp.Food;
 import com.example.elementsfoodapp.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodViewHolder> {
@@ -20,14 +22,15 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
 
     FoodListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
 
+    @NotNull
     @Override
-    public FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FoodViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.item_food, parent, false);
         return new FoodViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(FoodViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull FoodViewHolder holder, int position) {
         if (mFoods != null) {
             Food current = mFoods.get(position);
             holder.foodItemView.setText(current.getFood());

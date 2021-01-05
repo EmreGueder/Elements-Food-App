@@ -6,6 +6,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,20 +19,38 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
+import com.example.elementsfoodapp.Food;
 import com.example.elementsfoodapp.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class FoodListActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
     private SearchView searchView;
     private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categories);
+        setContentView(R.layout.activity_food_list);
+
+        recyclerView = findViewById(R.id.foodListRecyclerView);
+        final FoodListAdapter adapter = new FoodListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FoodViewModel mFoodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
+        mFoodViewModel.getAllFoods().observe(this, new Observer<List<Food>>() {
+            @Override
+            public void onChanged(List<Food> foods) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setFoods(foods);
+            }
+        });
 
         ImageView hideArrow = findViewById(R.id.bottomSheetHideArrow);
         LinearLayout bottomSheet = findViewById(R.id.bottomSheetFilter);
@@ -42,6 +64,7 @@ public class FoodListActivity extends AppCompatActivity {
                     case BottomSheetBehavior.STATE_HIDDEN:
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().show();
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                         break;
                     case BottomSheetBehavior.STATE_EXPANDED:
@@ -92,6 +115,7 @@ public class FoodListActivity extends AppCompatActivity {
                 getSupportActionBar().hide();
             }
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            recyclerView.setVisibility(View.INVISIBLE);
         }
         return super.onOptionsItemSelected(item);
     }

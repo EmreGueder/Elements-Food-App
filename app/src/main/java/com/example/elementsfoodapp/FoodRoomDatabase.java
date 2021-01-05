@@ -2,9 +2,11 @@ package com.example.elementsfoodapp;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,6 +20,26 @@ public abstract class FoodRoomDatabase extends RoomDatabase {
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+
+            // If you want to keep data through app restarts,
+            // comment out the following block
+            databaseWriteExecutor.execute(() -> {
+                // Populate the database in the background.
+                // If you want to start with more foods, just add them.
+                FoodDao dao = INSTANCE.foodDao();
+                dao.deleteAll();
+
+                Food food = new Food("Apfel", "test", "test","test",
+                        "test","test","test");
+                dao.insert(food);
+            });
+        }
+    };
+
     public static FoodRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (FoodRoomDatabase.class) {
@@ -28,6 +50,7 @@ public abstract class FoodRoomDatabase extends RoomDatabase {
                             // Wipes and rebuilds instead of migrating
                             // if no Migration object.
                             .fallbackToDestructiveMigration()
+                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
