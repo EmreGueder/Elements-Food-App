@@ -2,6 +2,7 @@ package com.example.elementsfoodapp.ui.categories;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.widget.SearchView;
 
 import com.example.elementsfoodapp.Food;
 import com.example.elementsfoodapp.R;
+import com.example.elementsfoodapp.ui.addnewfood.AddFoodActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +31,9 @@ import java.util.List;
 
 public class FoodListActivity extends AppCompatActivity {
 
+    public static final int ADD_FOOD_ACTIVITY_REQUEST_CODE = 1;
+
+    private FoodViewModel mFoodViewModel;
     private RecyclerView recyclerView;
     private SearchView searchView;
     private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
@@ -43,7 +48,7 @@ public class FoodListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FoodViewModel mFoodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
+        mFoodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
         mFoodViewModel.getAllFoods().observe(this, new Observer<List<Food>>() {
             @Override
             public void onChanged(List<Food> foods) {
@@ -118,5 +123,16 @@ public class FoodListActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.INVISIBLE);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String[] foodData = data.getStringArrayExtra(AddFoodActivity.EXTRA_REPLY);
+            Food food = new Food(foodData[0], foodData[1], foodData[2], foodData[3],
+                                 foodData[4], foodData[5], foodData[6]);
+            mFoodViewModel.insert(food); //parentactivity is foodlistactivity instead of mainactivity
+        }
     }
 }

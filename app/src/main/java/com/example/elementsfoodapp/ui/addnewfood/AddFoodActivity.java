@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class AddFoodActivity extends AppCompatActivity
         implements AddFoodAdapter.ListItemClickListener {
+
+    public static final String EXTRA_REPLY = "com.example.elementsfoodapp.REPLY";
 
     private RecyclerView recyclerView;
     private AddFoodAdapter.ViewHolder holder;
@@ -90,6 +93,19 @@ public class AddFoodActivity extends AppCompatActivity
                     }
                 }
             }
+            // Prepare intent to send food data to database
+            Intent replyIntent = new Intent();
+            String[] foodData = new String[7];
+            foodData[0] = addFoodName.getText().toString();
+            foodData[1] = addFoodEffect.getText().toString();
+            for (int i = 0; i < 5; i++) {
+                holder = (AddFoodAdapter.ViewHolder) recyclerView
+                        .findViewHolderForAdapterPosition(i);
+                foodData[i+2] = holder.getSecondaryTextView().getText().toString();
+            }
+            replyIntent.putExtra(EXTRA_REPLY, foodData);
+            setResult(RESULT_OK, replyIntent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
