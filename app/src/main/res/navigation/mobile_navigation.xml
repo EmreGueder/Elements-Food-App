@@ -18,9 +18,9 @@
         tools:layout="@layout/fragment_favorites" />
 
     <activity
-        android:id="@+id/navigation_categories"
+        android:id="@+id/navigation_food_list"
         android:name="com.example.elementsfoodapp.ui.foodlist.FoodListActivity"
-        android:label="@string/title_categories"
+        android:label="@string/title_food_list"
         tools:layout="@layout/activity_food_list"/>
 
 </navigation>

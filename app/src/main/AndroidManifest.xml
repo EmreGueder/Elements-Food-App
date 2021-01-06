@@ -11,7 +11,7 @@
         android:theme="@style/Theme.ElementsFoodApp">
 
         <activity android:name=".ui.foodlist.FoodListActivity"
-                  android:label="@string/title_categories">
+                  android:label="@string/title_food_list">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

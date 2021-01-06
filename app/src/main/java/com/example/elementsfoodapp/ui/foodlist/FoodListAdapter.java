@@ -46,12 +46,16 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
     }
 
     // getItemCount() is called many times, and when it is first called,
-    // mWords has not been updated (means initially, it's null, and we can't return null).
+    // mFoods has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
         if (mFoods != null)
             return mFoods.size();
         else return 0;
+    }
+
+    public Food getFoodAtPosition(int position) {
+        return mFoods.get(position);
     }
 
     static class FoodViewHolder extends RecyclerView.ViewHolder {

@@ -2,6 +2,7 @@ package com.example.elementsfoodapp;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -15,6 +16,9 @@ public interface FoodDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Food food);
+
+    @Delete
+    void deleteFood(Food food);
 
     @Query("DELETE FROM food_table")
     void deleteAll();

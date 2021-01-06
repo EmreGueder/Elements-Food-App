@@ -34,6 +34,12 @@ public abstract class FoodRoomDatabase extends RoomDatabase {
                     Food food = new Food("Apfel", "test", "test","test",
                             "test","test","test");
                     dao.insert(food);
+                    food = new Food("Banane", "test", "test","test",
+                            "test","test","test");
+                    dao.insert(food);
+                    food = new Food("Birne", "test", "test","test",
+                            "test","test","test");
+                    dao.insert(food);
                 }
             });
         }
