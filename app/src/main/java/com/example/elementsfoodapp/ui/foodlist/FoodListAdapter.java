@@ -19,8 +19,11 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
 
     private final LayoutInflater mInflater;
     private List<Food> mFoods; // Cached copy of foods
+    private OnItemClickListener listener;
 
-    FoodListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    FoodListAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
+    }
 
     @NotNull
     @Override
@@ -58,13 +61,31 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
         return mFoods.get(position);
     }
 
-    static class FoodViewHolder extends RecyclerView.ViewHolder {
+    class FoodViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView foodItemView;
 
         private FoodViewHolder(View itemView) {
             super(itemView);
             foodItemView = itemView.findViewById(R.id.foodTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(mFoods.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Food food);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

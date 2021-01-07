@@ -21,9 +21,10 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
-public class AddFoodActivity extends AppCompatActivity
+public class AddEditFoodActivity extends AppCompatActivity
         implements AddFoodAdapter.ListItemClickListener {
 
+    public static final String EXTRA_ID = "com.example.elementsfoodapp.EXTRA_ID";
     public static final String EXTRA_REPLY = "com.example.elementsfoodapp.REPLY";
 
     private RecyclerView recyclerView;
@@ -81,12 +82,11 @@ public class AddFoodActivity extends AppCompatActivity
                     addFoodEffect.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(),
                         "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 for (int i = 0; i < 5; i++) {
                     holder = (AddFoodAdapter.ViewHolder) recyclerView
                             .findViewHolderForAdapterPosition(i);
-                    if(holder.getSecondaryTextView().getText().toString().isEmpty()) {
+                    if (holder.getSecondaryTextView().getText().toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(),
                                 "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
                         break;
@@ -101,7 +101,7 @@ public class AddFoodActivity extends AppCompatActivity
             for (int i = 0; i < 5; i++) {
                 holder = (AddFoodAdapter.ViewHolder) recyclerView
                         .findViewHolderForAdapterPosition(i);
-                foodData[i+2] = holder.getSecondaryTextView().getText().toString();
+                foodData[i + 2] = holder.getSecondaryTextView().getText().toString();
             }
             replyIntent.putExtra(EXTRA_REPLY, foodData);
             setResult(RESULT_OK, replyIntent);
@@ -167,8 +167,7 @@ public class AddFoodActivity extends AppCompatActivity
                     holder.getSecondaryTextView().setText("");
                 }
             });
-        }
-        else if (position == FOOD_ELEMENTS) {
+        } else if (position == FOOD_ELEMENTS) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle Element(e) aus");
 
@@ -214,8 +213,7 @@ public class AddFoodActivity extends AppCompatActivity
                     holder.getSecondaryTextView().setText("");
                 }
             });
-        }
-        else if (position == FOOD_FLAVOR) {
+        } else if (position == FOOD_FLAVOR) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle Geschmacksrichtung(en) aus");
 
@@ -262,8 +260,7 @@ public class AddFoodActivity extends AppCompatActivity
                     holder.getSecondaryTextView().setText("");
                 }
             });
-        }
-        else if (position == FOOD_TEMP_BEHAVIOR) {
+        } else if (position == FOOD_TEMP_BEHAVIOR) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle thermische Wirkung(en) aus");
 
@@ -311,8 +308,7 @@ public class AddFoodActivity extends AppCompatActivity
                     holder.getSecondaryTextView().setText("");
                 }
             });
-        }
-        else if (position == FOOD_TARGET_ORGAN) {
+        } else if (position == FOOD_TARGET_ORGAN) {
             //Setting AlertDialog Characteristics
             builder.setTitle("Wähle Zielorgan(e) aus");
 

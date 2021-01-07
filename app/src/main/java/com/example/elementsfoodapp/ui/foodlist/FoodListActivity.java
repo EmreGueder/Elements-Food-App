@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elementsfoodapp.Food;
 import com.example.elementsfoodapp.R;
-import com.example.elementsfoodapp.ui.addnewfood.AddFoodActivity;
+import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,6 +35,7 @@ import java.util.List;
 public class FoodListActivity extends AppCompatActivity {
 
     public static final int ADD_FOOD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_FOOD_ACTIVITY_REQUEST_CODE = 2;
 
     private FloatingActionButton fab;
     private FoodViewModel mFoodViewModel;
@@ -48,7 +50,8 @@ public class FoodListActivity extends AppCompatActivity {
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
-            Intent intent = new Intent(FoodListActivity.this, AddFoodActivity.class);
+            Intent intent = new Intent(FoodListActivity.this,
+                    AddEditFoodActivity.class);
             startActivityForResult(intent, ADD_FOOD_ACTIVITY_REQUEST_CODE);
         });
 
@@ -83,6 +86,25 @@ public class FoodListActivity extends AppCompatActivity {
                 });
 
         helper.attachToRecyclerView(recyclerView);
+
+        adapter.setOnItemClickListener(new FoodListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Food food) {
+                Intent intent = new Intent(FoodListActivity.this,
+                        AddEditFoodActivity.class);
+                String[] foodData = new String[7];
+                foodData[0] = food.getFood();
+                foodData[1] = food.getEffect();
+                foodData[2] = food.getType();
+                foodData[3] = food.getElement();
+                foodData[4] = food.getFlavor();
+                foodData[5] = food.getThermalEffect();
+                foodData[6] = food.getTargetOrgan();
+                intent.putExtra(AddEditFoodActivity.EXTRA_ID, food.getId());
+                intent.putExtra(AddEditFoodActivity.EXTRA_REPLY, foodData);
+                startActivityForResult(intent, EDIT_FOOD_ACTIVITY_REQUEST_CODE);
+            }
+        });
 
         mFoodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
         mFoodViewModel.getAllFoods().observe(this, new Observer<List<Food>>() {
@@ -152,8 +174,7 @@ public class FoodListActivity extends AppCompatActivity {
         if (id == R.id.search) {
             searchView.setIconified(false);
             return true;
-        }
-        else if (id == R.id.filter) {
+        } else if (id == R.id.filter) {
             if (getSupportActionBar() != null) {
                 getSupportActionBar().hide();
             }
@@ -161,8 +182,7 @@ public class FoodListActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.INVISIBLE);
             fab.setVisibility(View.INVISIBLE);
             return true;
-        }
-        else if (id == R.id.clear_data) {
+        } else if (id == R.id.clear_data) {
             // Add a toast just for confirmation
             Toast.makeText(this, "Clearing the data...",
                     Toast.LENGTH_SHORT).show();
@@ -179,9 +199,9 @@ public class FoodListActivity extends AppCompatActivity {
 
         if (requestCode == ADD_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             // Extract StringArray Data and insert into Database
-            String[] foodData = data.getStringArrayExtra(AddFoodActivity.EXTRA_REPLY);
+            String[] foodData = data.getStringArrayExtra(AddEditFoodActivity.EXTRA_REPLY);
             Food food = new Food(foodData[0], foodData[1], foodData[2], foodData[3],
-                                 foodData[4], foodData[5], foodData[6]);
+                    foodData[4], foodData[5], foodData[6]);
             mFoodViewModel.insert(food);
         }
     }
