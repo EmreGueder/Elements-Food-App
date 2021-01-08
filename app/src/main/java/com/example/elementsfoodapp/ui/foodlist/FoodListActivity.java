@@ -203,6 +203,21 @@ public class FoodListActivity extends AppCompatActivity {
             Food food = new Food(foodData[0], foodData[1], foodData[2], foodData[3],
                     foodData[4], foodData[5], foodData[6]);
             mFoodViewModel.insert(food);
+        } else if (requestCode == EDIT_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(AddEditFoodActivity.EXTRA_ID, -1);
+
+            if (id == -1) {
+                Toast.makeText(this, "Nahrungsmittel kann nicht aktualisiert werden",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            // Extract StringArray Data and update it in the Database
+            String[] foodData = data.getStringArrayExtra(AddEditFoodActivity.EXTRA_REPLY);
+            Food food = new Food(foodData[0], foodData[1], foodData[2], foodData[3],
+                    foodData[4], foodData[5], foodData[6]);
+            food.setId(id);
+            mFoodViewModel.update(food);
+            Toast.makeText(this, "Aktualisiert", Toast.LENGTH_SHORT).show();
         }
     }
 }

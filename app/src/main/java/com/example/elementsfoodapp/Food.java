@@ -77,7 +77,8 @@ public class Food {
         this.mTargetOrgan = targetOrgan;
     }
 
-    public int getId() { return this.id; }
+    public void setId(int id) { this.id = id; }
+    public int getId() { return id; }
     public String getFood() { return this.mFood; }
     public String getEffect() { return this.mEffect; }
     public String getType() { return this.mType; }

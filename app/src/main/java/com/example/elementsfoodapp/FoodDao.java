@@ -13,8 +13,6 @@ import java.util.List;
 @Dao
 public interface FoodDao {
 
-    // @Update and @Delete available
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Food food);
 

@@ -31,15 +31,13 @@ public abstract class FoodRoomDatabase extends RoomDatabase {
                 // If we have no foods, then create initial food(s).
                 FoodDao dao = INSTANCE.foodDao();
                 if (dao.getAnyFood().length < 1) {
-                    Food food = new Food("Apfel", "test", "test","test",
+                    String[] foodNames = {"Apfel", "Birne", "Ananas", "Banane", "Kiwi", "Mango",
+                    "Brokkoli", "Karotte", "Haferflocken", "Tomate", "Milch", "Kohlrabi"};
+                    for (String s : foodNames) {
+                        Food food = new Food(s, "test", "test","test",
                             "test","test","test");
-                    dao.insert(food);
-                    food = new Food("Banane", "test", "test","test",
-                            "test","test","test");
-                    dao.insert(food);
-                    food = new Food("Birne", "test", "test","test",
-                            "test","test","test");
-                    dao.insert(food);
+                        dao.insert(food);
+                    }
                 }
             });
         }

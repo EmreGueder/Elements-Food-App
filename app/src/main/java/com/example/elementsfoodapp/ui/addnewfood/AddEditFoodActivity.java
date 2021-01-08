@@ -27,10 +27,12 @@ public class AddEditFoodActivity extends AppCompatActivity
     public static final String EXTRA_ID = "com.example.elementsfoodapp.EXTRA_ID";
     public static final String EXTRA_REPLY = "com.example.elementsfoodapp.REPLY";
 
+    private Intent intent;
     private RecyclerView recyclerView;
     private AddFoodAdapter.ViewHolder holder;
     private TextInputEditText addFoodName;
     private TextInputEditText addFoodEffect;
+    private String[] foodData;
     private String[] foodType;
     private String[] foodElements;
     private String[] foodFlavor;
@@ -64,24 +66,46 @@ public class AddEditFoodActivity extends AppCompatActivity
         foodTargetOrgan = res.getStringArray(R.array.food_target_organ);
         addFoodName = (TextInputEditText) findViewById(R.id.addFoodName);
         addFoodEffect = (TextInputEditText) findViewById(R.id.addFoodEffect);
+
+        intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            setTitle("Detail");
+            foodData = intent.getStringArrayExtra(EXTRA_REPLY);
+            addFoodName.setText(foodData[0]);
+            addFoodEffect.setText(foodData[1]);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.add_new_food_menu, menu);
+
+        // Sets the food properties text for the Detail Activity
+        if (intent.hasExtra(EXTRA_ID)) {
+            for (int i = 0; i < 5; i++) {
+                holder = (AddFoodAdapter.ViewHolder) recyclerView
+                        .findViewHolderForAdapterPosition(i);
+                if (holder != null) {
+                    holder.getSecondaryTextView().setText(foodData[i + 2]);
+                }
+            }
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
+        boolean isDispatchable = true;
 
         if (id == R.id.action_confirm) {
             if (addFoodName.getText().toString().isEmpty() ||
                     addFoodEffect.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(),
                         "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
+                isDispatchable = false;
             } else {
                 for (int i = 0; i < 5; i++) {
                     holder = (AddFoodAdapter.ViewHolder) recyclerView
@@ -89,24 +113,33 @@ public class AddEditFoodActivity extends AppCompatActivity
                     if (holder.getSecondaryTextView().getText().toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(),
                                 "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
+                        isDispatchable = false;
                         break;
                     }
                 }
             }
-            // Prepare intent to send food data to database
-            Intent replyIntent = new Intent();
-            String[] foodData = new String[7];
-            foodData[0] = addFoodName.getText().toString();
-            foodData[1] = addFoodEffect.getText().toString();
-            for (int i = 0; i < 5; i++) {
-                holder = (AddFoodAdapter.ViewHolder) recyclerView
-                        .findViewHolderForAdapterPosition(i);
-                foodData[i + 2] = holder.getSecondaryTextView().getText().toString();
+            // Prepare intent to send food data to FoodListActivity
+            if (isDispatchable) {
+                Intent replyIntent = new Intent();
+                String[] foodData = new String[7];
+                foodData[0] = addFoodName.getText().toString();
+                foodData[1] = addFoodEffect.getText().toString();
+                for (int i = 0; i < 5; i++) {
+                    holder = (AddFoodAdapter.ViewHolder) recyclerView
+                            .findViewHolderForAdapterPosition(i);
+                    foodData[i + 2] = holder.getSecondaryTextView().getText().toString();
+                }
+                replyIntent.putExtra(EXTRA_REPLY, foodData);
+
+                int idEXTRA = getIntent().getIntExtra(EXTRA_ID, -1);
+                if (idEXTRA != -1) {
+                    replyIntent.putExtra(EXTRA_ID, idEXTRA);
+                }
+
+                setResult(RESULT_OK, replyIntent);
+                finish();
+                return true;
             }
-            replyIntent.putExtra(EXTRA_REPLY, foodData);
-            setResult(RESULT_OK, replyIntent);
-            finish();
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
