@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.elementsfoodapp.Food;
+import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.R;
 
 import org.jetbrains.annotations.NotNull;

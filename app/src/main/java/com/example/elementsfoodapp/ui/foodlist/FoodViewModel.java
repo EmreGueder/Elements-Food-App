@@ -5,8 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.elementsfoodapp.Food;
-import com.example.elementsfoodapp.FoodRepository;
+import com.example.elementsfoodapp.db.Food;
+import com.example.elementsfoodapp.db.FoodRepository;
 
 import java.util.List;
 

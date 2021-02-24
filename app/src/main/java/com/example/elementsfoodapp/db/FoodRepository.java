@@ -1,4 +1,4 @@
-package com.example.elementsfoodapp;
+package com.example.elementsfoodapp.db;
 
 import android.app.Application;
 

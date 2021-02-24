@@ -1,4 +1,4 @@
-package com.example.elementsfoodapp;
+package com.example.elementsfoodapp.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,6 +7,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.elementsfoodapp.db.Food;
 
 import java.util.List;
 

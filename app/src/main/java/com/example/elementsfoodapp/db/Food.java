@@ -1,4 +1,4 @@
-package com.example.elementsfoodapp;
+package com.example.elementsfoodapp.db;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

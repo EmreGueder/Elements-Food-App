@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.elementsfoodapp.Food;
+import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.R;
 import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
