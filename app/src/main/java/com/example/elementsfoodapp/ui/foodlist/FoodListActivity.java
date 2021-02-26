@@ -202,6 +202,8 @@ public class FoodListActivity extends AppCompatActivity {
             Food food = new Food(foodData[0], foodData[1], foodData[2], foodData[3],
                     foodData[4], foodData[5], foodData[6]);
             mFoodViewModel.insert(food);
+            Toast.makeText(this, food.getFood() + " hinzugefügt", Toast.LENGTH_SHORT)
+                    .show();
         } else if (requestCode == EDIT_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditFoodActivity.EXTRA_ID, -1);
 
