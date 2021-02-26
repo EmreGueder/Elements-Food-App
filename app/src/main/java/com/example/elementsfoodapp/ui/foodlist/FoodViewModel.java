@@ -31,4 +31,8 @@ public class FoodViewModel extends AndroidViewModel {
     public void deleteFood(Food food) { mRepository.deleteFood(food); }
 
     public void deleteAll() { mRepository.deleteAll(); }
+
+    public LiveData<List<Food>> getSearchResults(String foodName) {
+        return mRepository.getSearchResults(foodName);
+    }
 }

@@ -32,4 +32,7 @@ public interface FoodDao {
 
     @Query("SELECT * from food_table LIMIT 1")
     Food[] getAnyFood();
+
+    @Query("SELECT * FROM food_table WHERE food LIKE :foodName")
+    LiveData<List<Food>> getSearchResults(String foodName);
 }

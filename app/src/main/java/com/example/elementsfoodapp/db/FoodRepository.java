@@ -42,4 +42,8 @@ public class FoodRepository {
             mFoodDao.deleteAll();
         });
     }
+
+    public LiveData<List<Food>> getSearchResults(String foodName) {
+            return mFoodDao.getSearchResults(foodName);
+    }
 }

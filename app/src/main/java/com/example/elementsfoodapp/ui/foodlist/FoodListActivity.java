@@ -1,7 +1,5 @@
 package com.example.elementsfoodapp.ui.foodlist;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,6 +34,7 @@ public class FoodListActivity extends AppCompatActivity {
     public static final int ADD_FOOD_ACTIVITY_REQUEST_CODE = 1;
     public static final int EDIT_FOOD_ACTIVITY_REQUEST_CODE = 2;
 
+    private FoodListAdapter adapter;
     private FloatingActionButton fab;
     private FoodViewModel mFoodViewModel;
     private RecyclerView recyclerView;
@@ -55,7 +54,7 @@ public class FoodListActivity extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.foodListRecyclerView);
-        final FoodListAdapter adapter = new FoodListAdapter(this);
+        adapter = new FoodListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -154,14 +153,26 @@ public class FoodListActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.food_list_menu, menu);
 
-        //Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query != null) {
+                    getFoodFromDb(query);
+                }
+                return true;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText != null) {
+                    getFoodFromDb(newText);
+                }
+                return true;
+            }
+        });
         searchView.setIconifiedByDefault(false);
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
-
         return true;
     }
 
@@ -220,5 +231,13 @@ public class FoodListActivity extends AppCompatActivity {
             mFoodViewModel.update(food);
             Toast.makeText(this, "Aktualisiert", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void getFoodFromDb(String searchText) {
+        String mSearchText = "%" + searchText + "%";
+        mFoodViewModel.getSearchResults(mSearchText).observe(this, foods -> {
+            // Update the cached copy of the words in the adapter.
+            adapter.setFoods(foods);
+        });
     }
 }
