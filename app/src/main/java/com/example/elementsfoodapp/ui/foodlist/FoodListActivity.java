@@ -324,12 +324,9 @@ public class FoodListActivity extends AppCompatActivity {
     }
 
     public void getAllFoods() {
-        mFoodViewModel.getAllFoods().observe(this, new Observer<List<Food>>() {
-            @Override
-            public void onChanged(List<Food> foods) {
-                // Update the cached copy of the words in the adapter.
-                adapter.setFoods(foods);
-            }
+        mFoodViewModel.getAllFoods().observe(this, foods -> {
+            // Update the cached copy of the words in the adapter.
+            adapter.setFoods(foods);
         });
     }
 
