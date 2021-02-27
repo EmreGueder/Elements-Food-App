@@ -50,6 +50,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/type_chipgroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:singleLine="true"
@@ -179,6 +180,7 @@
         android:textStyle="bold" />
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/element_chipgroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:singleSelection="true">
@@ -241,6 +243,7 @@
         android:textStyle="bold" />
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/flavor_chipgroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:singleSelection="true">
@@ -303,6 +306,7 @@
         android:textStyle="bold" />
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/thermaleffect_chipgroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:singleSelection="true">
@@ -369,6 +373,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/targetorgan_chipgroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:singleSelection="true">

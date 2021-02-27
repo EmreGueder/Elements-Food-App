@@ -23,6 +23,8 @@ import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.R;
 import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +47,9 @@ public class FoodListActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
+
+        mFoodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
+        getAllFoods();
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
@@ -104,15 +109,6 @@ public class FoodListActivity extends AppCompatActivity {
             }
         });
 
-        mFoodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
-        mFoodViewModel.getAllFoods().observe(this, new Observer<List<Food>>() {
-            @Override
-            public void onChanged(List<Food> foods) {
-                // Update the cached copy of the words in the adapter.
-                adapter.setFoods(foods);
-            }
-        });
-
         ImageView hideArrow = findViewById(R.id.bottomSheetHideArrow);
         LinearLayout bottomSheet = findViewById(R.id.bottomSheetFilter);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -146,6 +142,87 @@ public class FoodListActivity extends AppCompatActivity {
 
         hideArrow.setOnClickListener(v ->
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
+
+        ChipGroup typeChipGroup = findViewById(R.id.type_chipgroup);
+        ChipGroup elementChipGroup = findViewById(R.id.element_chipgroup);
+        ChipGroup flavorChipGroup = findViewById(R.id.flavor_chipgroup);
+        ChipGroup thermalEffectChipGroup = findViewById(R.id.thermaleffect_chipgroup);
+        ChipGroup targetOrganChipGroup = findViewById(R.id.targetorgan_chipgroup);
+
+        typeChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == View.NO_ID) {
+                getAllFoods();
+            }
+            else {
+                elementChipGroup.clearCheck();
+                flavorChipGroup.clearCheck();
+                thermalEffectChipGroup.clearCheck();
+                targetOrganChipGroup.clearCheck();
+                Chip chip = group.findViewById(checkedId);
+                String property = chip.getText().toString();
+                getTypeFilterResultFromDb(property);
+            }
+        });
+
+        elementChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == View.NO_ID) {
+                getAllFoods();
+            }
+            else {
+                typeChipGroup.clearCheck();
+                flavorChipGroup.clearCheck();
+                thermalEffectChipGroup.clearCheck();
+                targetOrganChipGroup.clearCheck();
+                Chip chip = group.findViewById(checkedId);
+                String property = chip.getText().toString();
+                getElementFilterResultFromDb(property);
+            }
+        });
+
+        flavorChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == View.NO_ID) {
+                getAllFoods();
+            }
+            else {
+                elementChipGroup.clearCheck();
+                typeChipGroup.clearCheck();
+                thermalEffectChipGroup.clearCheck();
+                targetOrganChipGroup.clearCheck();
+                Chip chip = group.findViewById(checkedId);
+                String property = "%" + chip.getText().toString() + "%";
+                getFlavorFilterResultFromDb(property);
+            }
+        });
+
+        thermalEffectChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == View.NO_ID) {
+                getAllFoods();
+            }
+            else {
+                typeChipGroup.clearCheck();
+                elementChipGroup.clearCheck();
+                flavorChipGroup.clearCheck();
+                targetOrganChipGroup.clearCheck();
+                Chip chip = group.findViewById(checkedId);
+                String property = "%" + chip.getText().toString() + "%";
+                getThermalEffectFilterResultFromDb(property);
+            }
+        });
+
+        targetOrganChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == View.NO_ID) {
+                getAllFoods();
+            }
+            else {
+                typeChipGroup.clearCheck();
+                elementChipGroup.clearCheck();
+                flavorChipGroup.clearCheck();
+                thermalEffectChipGroup.clearCheck();
+                Chip chip = group.findViewById(checkedId);
+                String property = "%" + chip.getText().toString() + "%";
+                getTargetOrganFilterResultFromDb(property);
+            }
+        });
     }
 
     @Override
@@ -236,6 +313,51 @@ public class FoodListActivity extends AppCompatActivity {
     public void getFoodFromDb(String searchText) {
         String mSearchText = "%" + searchText + "%";
         mFoodViewModel.getSearchResults(mSearchText).observe(this, foods -> {
+            // Update the cached copy of the words in the adapter.
+            adapter.setFoods(foods);
+        });
+    }
+
+    public void getAllFoods() {
+        mFoodViewModel.getAllFoods().observe(this, new Observer<List<Food>>() {
+            @Override
+            public void onChanged(List<Food> foods) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setFoods(foods);
+            }
+        });
+    }
+
+    public void getTypeFilterResultFromDb(String property) {
+        mFoodViewModel.getTypeFilterResults(property).observe(this, foods -> {
+            // Update the cached copy of the words in the adapter.
+            adapter.setFoods(foods);
+        });
+    }
+
+    public void getElementFilterResultFromDb(String property) {
+        mFoodViewModel.getElementFilterResults(property).observe(this, foods -> {
+            // Update the cached copy of the words in the adapter.
+            adapter.setFoods(foods);
+        });
+    }
+
+    public void getFlavorFilterResultFromDb(String property) {
+        mFoodViewModel.getFlavorFilterResults(property).observe(this, foods -> {
+            // Update the cached copy of the words in the adapter.
+            adapter.setFoods(foods);
+        });
+    }
+
+    public void getThermalEffectFilterResultFromDb(String property) {
+        mFoodViewModel.getThermalEffectFilterResults(property).observe(this, foods -> {
+            // Update the cached copy of the words in the adapter.
+            adapter.setFoods(foods);
+        });
+    }
+
+    public void getTargetOrganFilterResultFromDb(String property) {
+        mFoodViewModel.getTargetOrganFilterResults(property).observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
             adapter.setFoods(foods);
         });

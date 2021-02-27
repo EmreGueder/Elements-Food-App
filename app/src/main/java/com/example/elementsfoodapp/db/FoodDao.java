@@ -35,4 +35,19 @@ public interface FoodDao {
 
     @Query("SELECT * FROM food_table WHERE food LIKE :foodName")
     LiveData<List<Food>> getSearchResults(String foodName);
+
+    @Query("SELECT * FROM food_table WHERE type LIKE :property")
+    LiveData<List<Food>> getTypeFilterResults(String property);
+
+    @Query("SELECT * FROM food_table WHERE element LIKE :property")
+    LiveData<List<Food>> getElementFilterResults(String property);
+
+    @Query("SELECT * FROM food_table WHERE flavor LIKE :property")
+    LiveData<List<Food>> getFlavorFilterResults(String property);
+
+    @Query("SELECT * FROM food_table WHERE thermal_effect LIKE :property")
+    LiveData<List<Food>> getThermalEffectFilterResults(String property);
+
+    @Query("SELECT * FROM food_table WHERE target_organ LIKE :property")
+    LiveData<List<Food>> getTargetOrganFilterResults(String property);
 }

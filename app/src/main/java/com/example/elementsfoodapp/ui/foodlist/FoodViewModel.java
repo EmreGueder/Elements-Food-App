@@ -35,4 +35,24 @@ public class FoodViewModel extends AndroidViewModel {
     public LiveData<List<Food>> getSearchResults(String foodName) {
         return mRepository.getSearchResults(foodName);
     }
+
+    public LiveData<List<Food>> getTypeFilterResults(String property) {
+        return mRepository.getTypeFilterResults(property);
+    }
+
+    public LiveData<List<Food>> getElementFilterResults(String property) {
+        return mRepository.getElementFilterResults(property);
+    }
+
+    public LiveData<List<Food>> getFlavorFilterResults(String property) {
+        return mRepository.getFlavorFilterResults(property);
+    }
+
+    public LiveData<List<Food>> getThermalEffectFilterResults(String property) {
+        return mRepository.getThermalEffectFilterResults(property);
+    }
+
+    public LiveData<List<Food>> getTargetOrganFilterResults(String property) {
+        return mRepository.getTargetOrganFilterResults(property);
+    }
 }
