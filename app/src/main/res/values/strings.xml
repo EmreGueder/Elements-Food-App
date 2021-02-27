@@ -13,7 +13,7 @@
     <string name="text_filter_wood">Holz</string>
     <string name="text_filter_fire">Feuer</string>
     <string name="text_filter_earth">Erde</string>
-    <string name="text_filter_metal">Metall</string>
+    <string name="text_filter_metal">Metal</string>
     <string name="text_filter_water">Wasser</string>
     <string name="chips_title_text_element">Elemente</string>
     <string name="chips_title_text_type">Lebensmittelart</string>
@@ -57,6 +57,7 @@
     <string name="filter_title">Filter</string>
     <string name="hideArrow">Hide</string>
     <string name="clear_all_data">Clear all data</string>
+    <string name="ergebnisse_anzeigen">Ergebnisse anzeigen</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>
@@ -83,7 +84,7 @@
         <item>Holz</item>
         <item>Feuer</item>
         <item>Erde</item>
-        <item>Metall</item>
+        <item>Metal</item>
         <item>Wasser</item>
     </string-array>
     <string-array name="food_flavor_array">

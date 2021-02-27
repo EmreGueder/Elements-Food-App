@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +49,7 @@ public class FoodListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
-        mFoodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
+        mFoodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         getAllFoods();
 
         fab = findViewById(R.id.fab);
@@ -143,6 +144,7 @@ public class FoodListActivity extends AppCompatActivity {
         hideArrow.setOnClickListener(v ->
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
 
+        Button buttonShowResults = findViewById(R.id.buttonShowResults);
         ChipGroup typeChipGroup = findViewById(R.id.type_chipgroup);
         ChipGroup elementChipGroup = findViewById(R.id.element_chipgroup);
         ChipGroup flavorChipGroup = findViewById(R.id.flavor_chipgroup);
@@ -223,6 +225,9 @@ public class FoodListActivity extends AppCompatActivity {
                 getTargetOrganFilterResultFromDb(property);
             }
         });
+
+        buttonShowResults.setOnClickListener(v ->
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
     }
 
     @Override
