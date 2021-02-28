@@ -14,14 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.R;
+import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
@@ -30,7 +29,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 
 public class FoodListActivity extends AppCompatActivity {
 

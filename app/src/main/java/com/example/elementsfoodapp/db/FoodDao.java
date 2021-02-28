@@ -33,21 +33,21 @@ public interface FoodDao {
     @Query("SELECT * from food_table LIMIT 1")
     Food[] getAnyFood();
 
-    @Query("SELECT * FROM food_table WHERE food LIKE :foodName")
+    @Query("SELECT * FROM food_table WHERE food LIKE :foodName ORDER BY food ASC")
     LiveData<List<Food>> getSearchResults(String foodName);
 
-    @Query("SELECT * FROM food_table WHERE type LIKE :property")
+    @Query("SELECT * FROM food_table WHERE type LIKE :property ORDER BY food ASC")
     LiveData<List<Food>> getTypeFilterResults(String property);
 
-    @Query("SELECT * FROM food_table WHERE element LIKE :property")
+    @Query("SELECT * FROM food_table WHERE element LIKE :property ORDER BY food ASC")
     LiveData<List<Food>> getElementFilterResults(String property);
 
-    @Query("SELECT * FROM food_table WHERE flavor LIKE :property")
+    @Query("SELECT * FROM food_table WHERE flavor LIKE :property ORDER BY food ASC")
     LiveData<List<Food>> getFlavorFilterResults(String property);
 
-    @Query("SELECT * FROM food_table WHERE thermal_effect LIKE :property")
+    @Query("SELECT * FROM food_table WHERE thermal_effect LIKE :property ORDER BY food ASC")
     LiveData<List<Food>> getThermalEffectFilterResults(String property);
 
-    @Query("SELECT * FROM food_table WHERE target_organ LIKE :property")
+    @Query("SELECT * FROM food_table WHERE target_organ LIKE :property ORDER BY food ASC")
     LiveData<List<Food>> getTargetOrganFilterResults(String property);
 }
