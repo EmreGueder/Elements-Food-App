@@ -51,13 +51,14 @@
     <string name="text_filter_liver">Leber</string>
     <string name="text_filter_lung">Lunge</string>
     <string name="text_filter_stomach">Magen</string>
-    <string name="text_filter_malt">Malz</string>
     <string name="text_filter_spleen">Milz</string>
     <string name="text_filter_kidney">Niere</string>
     <string name="filter_title">Filter</string>
     <string name="hideArrow">Hide</string>
-    <string name="clear_all_data">Clear all data</string>
     <string name="ergebnisse_anzeigen">Ergebnisse anzeigen</string>
+    <string name="import_db">Import DB</string>
+    <string name="export_db">Export DB</string>
+    <string name="action_delete">Löschen</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>
@@ -110,7 +111,6 @@
         <item>Leber</item>
         <item>Lunge</item>
         <item>Magen</item>
-        <item>Malz</item>
         <item>Milz</item>
         <item>Niere</item>
     </string-array>

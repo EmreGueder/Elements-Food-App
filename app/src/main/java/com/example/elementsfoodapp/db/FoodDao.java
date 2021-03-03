@@ -24,13 +24,10 @@ public interface FoodDao {
     @Update
     void update(Food... food);
 
-    @Query("DELETE FROM food_table")
-    void deleteAll();
-
-    @Query("SELECT * from food_table ORDER BY food ASC")
+    @Query("SELECT * FROM food_table ORDER BY food ASC")
     LiveData<List<Food>> getAllFoods();
 
-    @Query("SELECT * from food_table LIMIT 1")
+    @Query("SELECT * FROM food_table LIMIT 1")
     Food[] getAnyFood();
 
     @Query("SELECT * FROM food_table WHERE food LIKE :foodName ORDER BY food ASC")

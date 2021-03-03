@@ -37,12 +37,6 @@ public class FoodRepository {
         });
     }
 
-    public void deleteAll() {
-        FoodRoomDatabase.databaseWriteExecutor.execute(() -> {
-            mFoodDao.deleteAll();
-        });
-    }
-
     public LiveData<List<Food>> getSearchResults(String foodName) {
             return mFoodDao.getSearchResults(foodName);
     }

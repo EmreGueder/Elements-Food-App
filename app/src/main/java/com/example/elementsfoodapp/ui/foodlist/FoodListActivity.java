@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ActionMode;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,12 +35,14 @@ public class FoodListActivity extends AppCompatActivity {
     public static final int ADD_FOOD_ACTIVITY_REQUEST_CODE = 1;
     public static final int EDIT_FOOD_ACTIVITY_REQUEST_CODE = 2;
 
-    private FoodListAdapter adapter;
-    private FloatingActionButton fab;
+    private FoodListAdapter mAdapter;
+    private FloatingActionButton mFab;
     private FoodViewModel mFoodViewModel;
-    private RecyclerView recyclerView;
-    private SearchView searchView;
-    private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
+    private RecyclerView mRecyclerView;
+    private SearchView mSearchView;
+    private BottomSheetBehavior<LinearLayout> mBottomSheetBehavior;
+    private Food mCurrentFood;
+    private ActionMode mActionMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,46 +52,19 @@ public class FoodListActivity extends AppCompatActivity {
         mFoodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         getAllFoods();
 
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(v -> {
+        mFab = findViewById(R.id.fab);
+        mFab.setOnClickListener(v -> {
             Intent intent = new Intent(FoodListActivity.this,
                     AddEditFoodActivity.class);
             startActivityForResult(intent, ADD_FOOD_ACTIVITY_REQUEST_CODE);
         });
 
-        recyclerView = findViewById(R.id.foodListRecyclerView);
-        adapter = new FoodListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView = findViewById(R.id.foodListRecyclerView);
+        mAdapter = new FoodListAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Add the functionality to swipe items in the
-        // recycler view to delete that item
-        ItemTouchHelper helper = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(0,
-                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-                    @Override
-                    public boolean onMove(@NonNull RecyclerView recyclerView,
-                                          @NonNull RecyclerView.ViewHolder viewHolder,
-                                          @NonNull RecyclerView.ViewHolder target) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
-                                         int direction) {
-                        int position = viewHolder.getAdapterPosition();
-                        Food myFood = adapter.getFoodAtPosition(position);
-                        Toast.makeText(FoodListActivity.this, "Lösche " +
-                                myFood.getFood(), Toast.LENGTH_SHORT).show();
-
-                        // Delete the food
-                        mFoodViewModel.deleteFood(myFood);
-                    }
-                });
-
-        helper.attachToRecyclerView(recyclerView);
-
-        adapter.setOnItemClickListener(new FoodListAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new FoodListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Food food) {
                 Intent intent = new Intent(FoodListActivity.this,
@@ -108,20 +83,30 @@ public class FoodListActivity extends AppCompatActivity {
             }
         });
 
+        mAdapter.setOnItemLongClickListener(new FoodListAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(Food food) {
+                if (mActionMode == null) {
+                    mCurrentFood = food;
+                    mActionMode = startActionMode(actionModeCallback);
+                }
+            }
+        });
+
         ImageView hideArrow = findViewById(R.id.bottomSheetHideArrow);
         LinearLayout bottomSheet = findViewById(R.id.bottomSheetFilter);
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
-        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        mBottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
                     case BottomSheetBehavior.STATE_HIDDEN:
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().show();
-                            recyclerView.setVisibility(View.VISIBLE);
-                            fab.setVisibility(View.VISIBLE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                            mFab.setVisibility(View.VISIBLE);
                         }
                         break;
                     case BottomSheetBehavior.STATE_EXPANDED:
@@ -140,7 +125,7 @@ public class FoodListActivity extends AppCompatActivity {
         });
 
         hideArrow.setOnClickListener(v ->
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
 
         Button buttonShowResults = findViewById(R.id.buttonShowResults);
         ChipGroup typeChipGroup = findViewById(R.id.type_chipgroup);
@@ -225,7 +210,7 @@ public class FoodListActivity extends AppCompatActivity {
         });
 
         buttonShowResults.setOnClickListener(v ->
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
     }
 
     @Override
@@ -233,8 +218,8 @@ public class FoodListActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.food_list_menu, menu);
 
-        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query != null) {
@@ -251,8 +236,8 @@ public class FoodListActivity extends AppCompatActivity {
                 return true;
             }
         });
-        searchView.setIconifiedByDefault(false);
-        searchView.setQueryHint(getResources().getString(R.string.search_hint));
+        mSearchView.setIconifiedByDefault(false);
+        mSearchView.setQueryHint(getResources().getString(R.string.search_hint));
         return true;
     }
 
@@ -262,27 +247,53 @@ public class FoodListActivity extends AppCompatActivity {
         //Required for SearchView to gain focus,
         //resulting the keyboard to show up after tapping the search icon
         if (id == R.id.search) {
-            searchView.setIconified(false);
+            mSearchView.setIconified(false);
             return true;
         } else if (id == R.id.filter) {
             if (getSupportActionBar() != null) {
                 getSupportActionBar().hide();
             }
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            recyclerView.setVisibility(View.INVISIBLE);
-            fab.setVisibility(View.INVISIBLE);
-            return true;
-        } else if (id == R.id.clear_data) {
-            // Add a toast just for confirmation
-            Toast.makeText(this, "Clearing the data...",
-                    Toast.LENGTH_SHORT).show();
-
-            // Delete the existing data
-            mFoodViewModel.deleteAll();
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            mRecyclerView.setVisibility(View.INVISIBLE);
+            mFab.setVisibility(View.INVISIBLE);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private final ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mode.getMenuInflater();
+            mode.setTitle("Löschen");
+            inflater.inflate(R.menu.context_menu, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            Food localFood = mCurrentFood;
+            if (item.getItemId() == R.id.action_delete && localFood != null) {
+                Toast.makeText(FoodListActivity.this, "Lösche " +
+                        localFood.getFood(), Toast.LENGTH_SHORT).show();
+                // Delete the food
+                mCurrentFood = null;
+                mFoodViewModel.deleteFood(localFood);
+                mode.finish();
+            }
+            return true;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            mActionMode = null;
+        }
+    };
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -317,49 +328,49 @@ public class FoodListActivity extends AppCompatActivity {
         String mSearchText = "%" + searchText + "%";
         mFoodViewModel.getSearchResults(mSearchText).observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
-            adapter.setFoods(foods);
+            mAdapter.setFoods(foods);
         });
     }
 
     public void getAllFoods() {
         mFoodViewModel.getAllFoods().observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
-            adapter.setFoods(foods);
+            mAdapter.setFoods(foods);
         });
     }
 
     public void getTypeFilterResultFromDb(String property) {
         mFoodViewModel.getTypeFilterResults(property).observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
-            adapter.setFoods(foods);
+            mAdapter.setFoods(foods);
         });
     }
 
     public void getElementFilterResultFromDb(String property) {
         mFoodViewModel.getElementFilterResults(property).observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
-            adapter.setFoods(foods);
+            mAdapter.setFoods(foods);
         });
     }
 
     public void getFlavorFilterResultFromDb(String property) {
         mFoodViewModel.getFlavorFilterResults(property).observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
-            adapter.setFoods(foods);
+            mAdapter.setFoods(foods);
         });
     }
 
     public void getThermalEffectFilterResultFromDb(String property) {
         mFoodViewModel.getThermalEffectFilterResults(property).observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
-            adapter.setFoods(foods);
+            mAdapter.setFoods(foods);
         });
     }
 
     public void getTargetOrganFilterResultFromDb(String property) {
         mFoodViewModel.getTargetOrganFilterResults(property).observe(this, foods -> {
             // Update the cached copy of the words in the adapter.
-            adapter.setFoods(foods);
+            mAdapter.setFoods(foods);
         });
     }
 }

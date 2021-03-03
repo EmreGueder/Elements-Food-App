@@ -43,7 +43,7 @@ public class AddEditFoodActivity extends AppCompatActivity
     private final boolean[] checkedFoodElements = new boolean[5];
     private final boolean[] checkedFoodFlavor = new boolean[5];
     private final boolean[] checkedFoodTempBehavior = new boolean[5];
-    private final boolean[] checkedFoodTargetOrgan = new boolean[11];
+    private final boolean[] checkedFoodTargetOrgan = new boolean[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
