@@ -4,10 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elementsfoodapp.db.Food;
@@ -23,6 +21,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
     private List<Food> mFoods; // Cached copy of foods
     private OnItemClickListener listener;
     private OnItemLongClickListener longClickListener;
+    private int mSelectedPos = RecyclerView.NO_POSITION;
 
     FoodListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -40,7 +39,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
         if (mFoods != null) {
             Food current = mFoods.get(position);
             holder.foodItemView.setText(current.getFood());
-            holder.itemView.setActivated(true);
+            holder.itemView.setSelected(mSelectedPos == position);
         } else {
             // Covers the case of data not being ready yet.
             holder.foodItemView.setText("Keine Lebensmittel");
@@ -90,6 +89,9 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
                     if (longClickListener != null && position != RecyclerView.NO_POSITION) {
                         longClickListener.onItemLongClick(mFoods.get(position));
                     }
+                    notifyItemChanged(mSelectedPos);
+                    mSelectedPos = getLayoutPosition();
+                    notifyItemChanged(mSelectedPos);
                     return true;
                 }
             });
@@ -110,5 +112,10 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
 
     public void setOnItemLongClickListener(OnItemLongClickListener longClickListener) {
         this.longClickListener = longClickListener;
+    }
+
+    public void setSelectedPos(int SelectedPos) {
+        mSelectedPos = SelectedPos;
+        notifyDataSetChanged();
     }
 }

@@ -291,6 +291,7 @@ public class FoodListActivity extends AppCompatActivity {
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
+            mAdapter.setSelectedPos(RecyclerView.NO_POSITION);
             mActionMode = null;
         }
     };
