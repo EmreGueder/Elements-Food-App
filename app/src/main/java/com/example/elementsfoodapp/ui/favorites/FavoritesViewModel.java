@@ -1,17 +1,27 @@
 package com.example.elementsfoodapp.ui.favorites;
 
+import android.app.Application;
+
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.elementsfoodapp.db.Food;
+import com.example.elementsfoodapp.db.FoodRepository;
+
+import java.util.List;
 
 public class FavoritesViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private FoodRepository mRepository;
 
-    public FavoritesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is favorites fragment");
+    public FavoritesViewModel(Application application) {
+        super();
+        mRepository = new FoodRepository(application);
     }
 
-    public LiveData<String> getText() { return mText; }
+    public void update(Food food) { mRepository.update(food); }
+
+    public void deleteFavoriteFood(Food food) { mRepository.deleteFavoriteFood(food); }
+
+    public LiveData<List<Food>> getFavoriteFoods() { return mRepository.getFavoriteFoods(); }
 }
