@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.elementsfoodapp.db.Food;
@@ -47,4 +48,15 @@ public interface FoodDao {
 
     @Query("SELECT * FROM food_table WHERE target_organ LIKE :property ORDER BY food ASC")
     LiveData<List<Food>> getTargetOrganFilterResults(String property);
+
+    @Query("UPDATE food_table SET favorite_food = 1 WHERE id == :foodId")
+    void insertFavoriteFood(int foodId);
+
+    @Query("UPDATE food_table SET favorite_food = 0 WHERE id == :foodId")
+    void deleteFavoriteFood(int foodId);
+
+    @Query("SELECT * FROM food_table WHERE favorite_food == 1")
+    LiveData<List<Food>> getFavoriteFoods();
+
+
 }

@@ -60,4 +60,19 @@ public class FoodRepository {
     public LiveData<List<Food>> getTargetOrganFilterResults(String property) {
         return mFoodDao.getTargetOrganFilterResults(property);
     }
+
+    public void insertFavoriteFood(int foodId) {
+        FoodRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mFoodDao.insertFavoriteFood(foodId);
+        });
+    }
+    public LiveData<List<Food>> getFavoriteFoods() {
+        return mFoodDao.getFavoriteFoods();
+    }
+
+    public void deleteFavoriteFood(int foodId) {
+        FoodRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mFoodDao.deleteFavoriteFood(foodId);
+        });
+    }
 }

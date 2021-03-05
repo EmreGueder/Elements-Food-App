@@ -21,6 +21,8 @@ import com.example.elementsfoodapp.R;
 import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 
+import java.util.Objects;
+
 import static android.app.Activity.RESULT_OK;
 
 public class FavoritesListFragment extends Fragment {
@@ -38,6 +40,8 @@ public class FavoritesListFragment extends Fragment {
         mFavoritesViewModel =
                 new ViewModelProvider(this).get(FavoritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+        getFavoriteFoods();
 
         mRecyclerView = root.findViewById(R.id.foodListRecyclerView);
         mAdapter = new FavoritesListAdapter(getContext());
@@ -67,11 +71,10 @@ public class FavoritesListFragment extends Fragment {
             public void onItemLongClick(Food food) {
                 if (mActionMode == null) {
                     mCurrentFood = food;
-                    mActionMode = getActivity().startActionMode(actionModeCallback);
+                    mActionMode = requireActivity().startActionMode(actionModeCallback);
                 }
             }
         });
-
         return root;
     }
 
@@ -79,14 +82,15 @@ public class FavoritesListFragment extends Fragment {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
-            mode.setTitle("Löschen");
+            mode.setTitle("Optionen");
             inflater.inflate(R.menu.context_menu, menu);
             return true;
         }
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false;
+            menu.findItem(R.id.action_favorite).setVisible(false);
+            return true;
         }
 
         @Override
@@ -97,7 +101,7 @@ public class FavoritesListFragment extends Fragment {
                         localFood.getFood(), Toast.LENGTH_SHORT).show();
                 // Delete the food
                 mCurrentFood = null;
-                mFavoritesViewModel.deleteFood(localFood);
+                mFavoritesViewModel.deleteFavoriteFood(localFood.getId());
                 mode.finish();
             }
             return true;
@@ -114,7 +118,7 @@ public class FavoritesListFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-         if (requestCode == EDIT_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == EDIT_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditFoodActivity.EXTRA_ID, -1);
 
             if (id == -1) {
@@ -130,6 +134,13 @@ public class FavoritesListFragment extends Fragment {
             mFavoritesViewModel.update(food);
             Toast.makeText(getContext(), "Aktualisiert", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void getFavoriteFoods() {
+        mFavoritesViewModel.getFavoriteFoods().observe(getViewLifecycleOwner(), foods -> {
+            // Update the cached copy of the words in the adapter.
+            mAdapter.setFoods(foods);
+        });
     }
 }
 

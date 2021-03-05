@@ -265,7 +265,7 @@ public class FoodListActivity extends AppCompatActivity {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
-            mode.setTitle("Löschen");
+            mode.setTitle("Optionen");
             inflater.inflate(R.menu.context_menu, menu);
             return true;
         }
@@ -284,6 +284,14 @@ public class FoodListActivity extends AppCompatActivity {
                 // Delete the food
                 mCurrentFood = null;
                 mFoodViewModel.deleteFood(localFood);
+                mode.finish();
+            }
+            if (item.getItemId() == R.id.action_favorite && localFood != null) {
+                Toast.makeText(FoodListActivity.this, localFood.getFood() +
+                        " als Favorit hinzugefügt", Toast.LENGTH_SHORT).show();
+                //Add to favorites list
+                mCurrentFood = null;
+                mFoodViewModel.insertFavoriteFood(localFood.getId());
                 mode.finish();
             }
             return true;

@@ -53,4 +53,6 @@ public class FoodViewModel extends AndroidViewModel {
     public LiveData<List<Food>> getTargetOrganFilterResults(String property) {
         return mRepository.getTargetOrganFilterResults(property);
     }
+
+    public void insertFavoriteFood(int foodId) { mRepository.insertFavoriteFood(foodId); }
 }

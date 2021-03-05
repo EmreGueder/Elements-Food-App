@@ -1,7 +1,9 @@
 package com.example.elementsfoodapp.db;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -40,6 +42,9 @@ public class Food {
     @ColumnInfo(name = "target_organ")
     private String mTargetOrgan;
 
+    @ColumnInfo(name = "favorite_food")
+    private int mFavorite;
+
     public Food(@NonNull String food,
                 @NonNull String effect,
                 @NonNull String type,
@@ -55,6 +60,7 @@ public class Food {
         this.mFlavor = flavor;
         this.mThermalEffect = thermalEffect;
         this.mTargetOrgan = targetOrgan;
+        this.mFavorite = 0;
     }
 
     @Ignore
@@ -75,9 +81,11 @@ public class Food {
         this.mFlavor = flavor;
         this.mThermalEffect = thermalEffect;
         this.mTargetOrgan = targetOrgan;
+        this.mFavorite = 0;
     }
 
     public void setId(int id) { this.id = id; }
+    public void setFavorite(int fav) { this.mFavorite = fav; }
     public int getId() { return id; }
     public String getFood() { return this.mFood; }
     public String getEffect() { return this.mEffect; }
@@ -86,4 +94,6 @@ public class Food {
     public String getFlavor() { return this.mFlavor; }
     public String getThermalEffect() { return this.mThermalEffect; }
     public String getTargetOrgan() { return this.mTargetOrgan; }
+    public int getFavorite() { return this.mFavorite; }
 }
+

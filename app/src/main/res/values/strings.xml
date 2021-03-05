@@ -59,6 +59,7 @@
     <string name="import_db">Import DB</string>
     <string name="export_db">Export DB</string>
     <string name="action_delete">Löschen</string>
+    <string name="action_favorite">Favorit hinzufügen</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>
