@@ -21,6 +21,8 @@ public class FavoritesViewModel extends AndroidViewModel {
 
     public void update(Food food) { mRepository.update(food); }
 
+    public void insertFavoriteFood(int foodId) { mRepository.insertFavoriteFood(foodId); }
+
     public void deleteFavoriteFood(int foodId) { mRepository.deleteFavoriteFood(foodId); }
 
     public LiveData<List<Food>> getFavoriteFoods() { return mRepository.getFavoriteFoods(); }

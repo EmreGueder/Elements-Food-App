@@ -132,6 +132,7 @@ public class FavoritesListFragment extends Fragment {
                     foodData[4], foodData[5], foodData[6]);
             food.setId(id);
             mFavoritesViewModel.update(food);
+            mFavoritesViewModel.insertFavoriteFood(food.getId());
             Toast.makeText(getContext(), "Aktualisiert", Toast.LENGTH_SHORT).show();
         }
     }
@@ -143,12 +144,3 @@ public class FavoritesListFragment extends Fragment {
         });
     }
 }
-
-
-
-/*favoritesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
