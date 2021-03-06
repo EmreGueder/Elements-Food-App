@@ -35,26 +35,3 @@ public abstract class FoodRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 }
-
-   /*private static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
-
-            databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more foods, just add them.
-                // If we have no foods, then create initial food(s).
-                FoodDao dao = INSTANCE.foodDao();
-                if (dao.getAnyFood().length < 1) {
-                    String[] foodNames = {"Apfel", "Birne", "Ananas", "Banane", "Kiwi", "Mango",
-                    "Brokkoli", "Karotte", "Haferflocken", "Tomate", "Milch", "Kohlrabi"};
-                    for (String s : foodNames) {
-                        Food food = new Food(s, "test", "test","test",
-                            "test","test","test");
-                        dao.insert(food);
-                    }
-                }
-            });
-        }
-    };*/
