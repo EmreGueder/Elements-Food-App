@@ -4,7 +4,7 @@
     <string name="title_favorites">Favoriten</string>
     <string name="title_food_list">Liste</string>
     <string name="search_title">Suchen</string>
-    <string name="title_add_new_food">Add new food</string>
+    <string name="title_add_new_food">Nahrungsmittel hinzufügen</string>
     <string name="action_confirm">Confirm</string>
     <string name="add_food_name">Name des Lebensmittels</string>
     <string name="add_food_effect">Wirkung</string>

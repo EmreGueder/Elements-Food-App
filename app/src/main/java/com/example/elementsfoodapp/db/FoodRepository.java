@@ -65,14 +65,16 @@ public class FoodRepository {
         return mFoodDao.getTargetOrganFilterResults(property);
     }
 
+    public LiveData<List<Food>> getFavoriteFoods() {
+        return mFoodDao.getFavoriteFoods();
+    }
+
+    public LiveData<List<Food>> getLastViewedFoods() { return mFoodDao.getLastViewedFoods(); }
+
     public void insertFavoriteFood(int foodId) {
         FoodRoomDatabase.databaseWriteExecutor.execute(() -> {
             mFoodDao.insertFavoriteFood(foodId);
         });
-    }
-
-    public LiveData<List<Food>> getFavoriteFoods() {
-        return mFoodDao.getFavoriteFoods();
     }
 
     public void deleteFavoriteFood(int foodId) {
@@ -86,8 +88,6 @@ public class FoodRepository {
             mFoodDao.insertLastViewedFood(foodId);
         });
     }
-
-    public LiveData<List<Food>> getLastViewedFoods() { return mFoodDao.getLastViewedFoods(); }
 
     public void deleteLastViewedFoods() {
         FoodRoomDatabase.databaseWriteExecutor.execute(() -> {

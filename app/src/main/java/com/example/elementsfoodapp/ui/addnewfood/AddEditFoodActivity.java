@@ -21,6 +21,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class AddEditFoodActivity extends AppCompatActivity
         implements AddFoodAdapter.ListItemClickListener {
 
@@ -64,8 +66,8 @@ public class AddEditFoodActivity extends AppCompatActivity
         foodFlavor = res.getStringArray(R.array.food_flavor_array);
         foodTempBehavior = res.getStringArray(R.array.food_temp_behavior_array);
         foodTargetOrgan = res.getStringArray(R.array.food_target_organ);
-        addFoodName = (TextInputEditText) findViewById(R.id.addFoodName);
-        addFoodEffect = (TextInputEditText) findViewById(R.id.addFoodEffect);
+        addFoodName = findViewById(R.id.addFoodName);
+        addFoodEffect = findViewById(R.id.addFoodEffect);
 
         intent = getIntent();
 
@@ -101,8 +103,8 @@ public class AddEditFoodActivity extends AppCompatActivity
         boolean isDispatchable = true;
 
         if (id == R.id.action_confirm) {
-            if (addFoodName.getText().toString().isEmpty() ||
-                    addFoodEffect.getText().toString().isEmpty()) {
+            if (Objects.requireNonNull(addFoodName.getText()).toString().isEmpty() ||
+                    Objects.requireNonNull(addFoodEffect.getText()).toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(),
                         "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
                 isDispatchable = false;
@@ -110,6 +112,7 @@ public class AddEditFoodActivity extends AppCompatActivity
                 for (int i = 0; i < 5; i++) {
                     holder = (AddFoodAdapter.ViewHolder) recyclerView
                             .findViewHolderForAdapterPosition(i);
+                    assert holder != null;
                     if (holder.getSecondaryTextView().getText().toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(),
                                 "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show();
@@ -127,6 +130,7 @@ public class AddEditFoodActivity extends AppCompatActivity
                 for (int i = 0; i < 5; i++) {
                     holder = (AddFoodAdapter.ViewHolder) recyclerView
                             .findViewHolderForAdapterPosition(i);
+                    assert holder != null;
                     foodData[i + 2] = holder.getSecondaryTextView().getText().toString();
                 }
                 replyIntent.putExtra(EXTRA_REPLY, foodData);

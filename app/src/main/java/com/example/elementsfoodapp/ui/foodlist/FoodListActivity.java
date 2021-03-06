@@ -46,12 +46,19 @@ public class FoodListActivity extends AppCompatActivity {
     private ActionMode mActionMode;
     private MenuItem searchEffect;
 
+    ChipGroup typeChipGroup;
+    ChipGroup elementChipGroup;
+    ChipGroup flavorChipGroup;
+    ChipGroup thermalEffectChipGroup;
+    ChipGroup targetOrganChipGroup;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
         mFoodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+
         getAllFoods();
 
         mFab = findViewById(R.id.fab);
@@ -131,11 +138,11 @@ public class FoodListActivity extends AppCompatActivity {
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
 
         Button buttonShowResults = findViewById(R.id.buttonShowResults);
-        ChipGroup typeChipGroup = findViewById(R.id.type_chipgroup);
-        ChipGroup elementChipGroup = findViewById(R.id.element_chipgroup);
-        ChipGroup flavorChipGroup = findViewById(R.id.flavor_chipgroup);
-        ChipGroup thermalEffectChipGroup = findViewById(R.id.thermaleffect_chipgroup);
-        ChipGroup targetOrganChipGroup = findViewById(R.id.targetorgan_chipgroup);
+        typeChipGroup = findViewById(R.id.type_chipgroup);
+        elementChipGroup = findViewById(R.id.element_chipgroup);
+        flavorChipGroup = findViewById(R.id.flavor_chipgroup);
+        thermalEffectChipGroup = findViewById(R.id.thermaleffect_chipgroup);
+        targetOrganChipGroup = findViewById(R.id.targetorgan_chipgroup);
 
         typeChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == View.NO_ID) {
@@ -234,6 +241,11 @@ public class FoodListActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 if (query != null) {
                     getFoodFromDb(query);
+                    typeChipGroup.clearCheck();
+                    elementChipGroup.clearCheck();
+                    flavorChipGroup.clearCheck();
+                    thermalEffectChipGroup.clearCheck();
+                    targetOrganChipGroup.clearCheck();
                 }
                 return true;
             }
@@ -242,6 +254,11 @@ public class FoodListActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 if (newText != null) {
                     getFoodFromDb(newText);
+                    typeChipGroup.clearCheck();
+                    elementChipGroup.clearCheck();
+                    flavorChipGroup.clearCheck();
+                    thermalEffectChipGroup.clearCheck();
+                    targetOrganChipGroup.clearCheck();
                 }
                 return true;
             }
