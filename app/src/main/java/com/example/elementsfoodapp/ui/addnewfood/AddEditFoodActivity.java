@@ -165,7 +165,7 @@ public class AddEditFoodActivity extends AppCompatActivity
         //Building the list to be shown in AlertDialog
         if (position == FOOD_TYPE) {
             //Setting AlertDialog Characteristics
-            builder.setTitle("Wähle Lebensmittelart aus");
+            builder.setTitle("Wähle Nahrungsmittelart aus");
 
             builder.setMultiChoiceItems(
                     foodType, checkedFoodType, (dialog, which, isChecked) -> {

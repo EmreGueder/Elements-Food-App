@@ -6,7 +6,7 @@
     <string name="search_title">Suchen</string>
     <string name="title_add_new_food">Nahrungsmittel hinzufügen</string>
     <string name="action_confirm">Confirm</string>
-    <string name="add_food_name">Name des Lebensmittels</string>
+    <string name="add_food_name">Nahrungsmittel</string>
     <string name="add_food_effect">Wirkung</string>
     <string name="title_filter">Filter</string>
     <string name="text_filter_wood">Holz</string>
@@ -15,7 +15,7 @@
     <string name="text_filter_metal">Metal</string>
     <string name="text_filter_water">Wasser</string>
     <string name="chips_title_text_element">Elemente</string>
-    <string name="chips_title_text_type">Lebensmittelart</string>
+    <string name="chips_title_text_type">Nahrungsmittelart</string>
     <string name="text_filter_fruits">Beeren und Früchte</string>
     <string name="text_filter_fish">Fisch und Meeresfrüchte</string>
     <string name="text_filter_meat">Fleisch</string>
@@ -65,7 +65,7 @@
     <string name="search_effect_hint">Suchen nach Wirkung …</string>
     <string name="search_food_hint">Suchen …</string>
     <string-array name="food_properties_array">
-        <item>Lebensmittelart</item>
+        <item>Nahrungsmittelart</item>
         <item>Element</item>
         <item>Geschmacksrichtung</item>
         <item>Thermische Wirkung</item>
