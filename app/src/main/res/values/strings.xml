@@ -60,6 +60,8 @@
     <string name="export_db">Export DB</string>
     <string name="action_delete">Löschen</string>
     <string name="action_favorite">Favorit hinzufügen</string>
+    <string name="home_last_viewed_title">Zuletzt angesehen</string>
+    <string name="delete_history">Verlauf löschen</string>
     <string-array name="food_properties_array">
         <item>Lebensmittelart</item>
         <item>Element</item>

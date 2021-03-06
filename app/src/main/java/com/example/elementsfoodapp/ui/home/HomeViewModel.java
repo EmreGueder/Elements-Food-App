@@ -25,4 +25,6 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void insertLastViewedFood(int foodId) { mRepository.insertLastViewedFood(foodId); }
 
+    public void deleteLastViewedFoods() { mRepository.deleteLastViewedFoods(); }
+
 }

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class HomeListAdapter  extends RecyclerView.Adapter<HomeListAdapter.FoodViewHolder>{
+public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.FoodViewHolder>{
 
     private final LayoutInflater mInflater;
     private List<Food> mFoods; // Cached copy of foods

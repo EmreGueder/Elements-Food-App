@@ -84,4 +84,10 @@ public class FoodRepository {
     }
 
     public LiveData<List<Food>> getLastViewedFoods() { return mFoodDao.getLastViewedFoods(); }
+
+    public void deleteLastViewedFoods() {
+        FoodRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mFoodDao.deleteLastViewedFoods();
+        });
+    }
 }

@@ -6,10 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
-
-import com.example.elementsfoodapp.db.Food;
 
 import java.util.List;
 
@@ -63,6 +60,9 @@ public interface FoodDao {
 
     @Query("SELECT * FROM food_table WHERE timestamp != 0 ORDER BY timestamp DESC LIMIT 10")
     LiveData<List<Food>> getLastViewedFoods();
+
+    @Query("UPDATE food_table SET timestamp = 0")
+    void deleteLastViewedFoods();
 
 
 }

@@ -21,8 +21,6 @@ import com.example.elementsfoodapp.R;
 import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 
-import java.util.Objects;
-
 import static android.app.Activity.RESULT_OK;
 
 public class FavoritesListFragment extends Fragment {

@@ -2,8 +2,10 @@ package com.example.elementsfoodapp.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -18,7 +20,8 @@ import com.example.elementsfoodapp.R;
 import com.example.elementsfoodapp.db.Food;
 import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 import com.example.elementsfoodapp.ui.favorites.FavoritesListAdapter;
-import com.example.elementsfoodapp.ui.favorites.FavoritesViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -30,15 +33,16 @@ public class HomeFragment extends Fragment {
     private HomeViewModel mHomeViewModel;
     private HomeListAdapter mAdapter;
     private RecyclerView mRecyclerView;
-    private Food mCurrentFood;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         mHomeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         getLastViewedFoods();
+
 
         mRecyclerView = root.findViewById(R.id.foodListRecyclerView);
         mAdapter = new HomeListAdapter(getContext());
@@ -64,6 +68,22 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.home_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_delete_history) {
+            mHomeViewModel.deleteLastViewedFoods();
+        }
+        return true;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
