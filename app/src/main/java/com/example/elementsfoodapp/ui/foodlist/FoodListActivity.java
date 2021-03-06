@@ -227,6 +227,8 @@ public class FoodListActivity extends AppCompatActivity {
         searchEffect.setChecked(isChecked);
 
         mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        mSearchView.setIconifiedByDefault(false);
+        mSearchView.setQueryHint(getResources().getString(R.string.search_food_hint));
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -244,8 +246,6 @@ public class FoodListActivity extends AppCompatActivity {
                 return true;
             }
         });
-        mSearchView.setIconifiedByDefault(false);
-        mSearchView.setQueryHint(getResources().getString(R.string.search_hint));
         return true;
     }
 
@@ -273,6 +273,11 @@ public class FoodListActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("checkbox", item.isChecked());
             editor.apply();
+            if (item.isChecked()) {
+                mSearchView.setQueryHint(getResources().getString(R.string.search_effect_hint));
+            } else {
+                mSearchView.setQueryHint(getResources().getString(R.string.search_food_hint));
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
