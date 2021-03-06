@@ -41,6 +41,10 @@ public class FoodRepository {
             return mFoodDao.getSearchResults(foodName);
     }
 
+    public LiveData<List<Food>> getEffectSearchResults(String effectDescription) {
+        return mFoodDao.getEffectSearchResults(effectDescription);
+    }
+
     public LiveData<List<Food>> getTypeFilterResults(String property) {
         return mFoodDao.getTypeFilterResults(property);
     }

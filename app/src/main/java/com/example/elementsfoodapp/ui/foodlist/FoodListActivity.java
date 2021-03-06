@@ -1,6 +1,7 @@
 package com.example.elementsfoodapp.ui.foodlist;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,6 +44,7 @@ public class FoodListActivity extends AppCompatActivity {
     private BottomSheetBehavior<LinearLayout> mBottomSheetBehavior;
     private Food mCurrentFood;
     private ActionMode mActionMode;
+    private MenuItem searchEffect;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -219,6 +221,11 @@ public class FoodListActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.food_list_menu, menu);
 
+        SharedPreferences settings = getSharedPreferences("settings", 0);
+        boolean isChecked = settings.getBoolean("checkbox", false);
+        searchEffect = menu.findItem(R.id.action_check);
+        searchEffect.setChecked(isChecked);
+
         mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -250,13 +257,22 @@ public class FoodListActivity extends AppCompatActivity {
         if (id == R.id.search) {
             mSearchView.setIconified(false);
             return true;
-        } else if (id == R.id.filter) {
+        }
+        if (id == R.id.filter) {
             if (getSupportActionBar() != null) {
                 getSupportActionBar().hide();
             }
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             mRecyclerView.setVisibility(View.INVISIBLE);
             mFab.setVisibility(View.INVISIBLE);
+            return true;
+        }
+        if (id == R.id.action_check) {
+            item.setChecked(!item.isChecked());
+            SharedPreferences settings = getSharedPreferences("settings", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("checkbox", item.isChecked());
+            editor.apply();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -336,10 +352,16 @@ public class FoodListActivity extends AppCompatActivity {
 
     public void getFoodFromDb(String searchText) {
         String mSearchText = "%" + searchText + "%";
-        mFoodViewModel.getSearchResults(mSearchText).observe(this, foods -> {
-            // Update the cached copy of the words in the adapter.
-            mAdapter.setFoods(foods);
-        });
+        if (searchEffect.isChecked()) {
+            mFoodViewModel.getEffectSearchResults(mSearchText).observe(this, foods -> {
+                mAdapter.setFoods(foods);
+            });
+        } else {
+            mFoodViewModel.getSearchResults(mSearchText).observe(this, foods -> {
+                // Update the cached copy of the words in the adapter.
+                mAdapter.setFoods(foods);
+            });
+        }
     }
 
     public void getAllFoods() {

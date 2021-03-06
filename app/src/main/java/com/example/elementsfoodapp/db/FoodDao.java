@@ -31,6 +31,9 @@ public interface FoodDao {
     @Query("SELECT * FROM food_table WHERE food LIKE :foodName ORDER BY food ASC")
     LiveData<List<Food>> getSearchResults(String foodName);
 
+    @Query("SELECT * FROM food_table WHERE effect LIKE :effectDescription ORDER BY food ASC")
+    LiveData<List<Food>> getEffectSearchResults(String effectDescription);
+
     @Query("SELECT * FROM food_table WHERE type LIKE :property ORDER BY food ASC")
     LiveData<List<Food>> getTypeFilterResults(String property);
 

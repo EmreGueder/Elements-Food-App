@@ -13,6 +13,14 @@
           app:showAsAction="collapseActionView|ifRoom" />
 
     <item
+        android:id="@+id/action_check"
+        android:title="@string/action_check"
+        android:orderInCategory="98"
+        app:showAsAction="never"
+        android:visible="true"
+        android:checkable="true"/>
+
+    <item
         android:id="@+id/import_db"
         android:orderInCategory="99"
         android:title="@string/import_db"

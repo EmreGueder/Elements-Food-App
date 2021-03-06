@@ -34,6 +34,10 @@ public class FoodViewModel extends AndroidViewModel {
         return mRepository.getSearchResults(foodName);
     }
 
+    public LiveData<List<Food>> getEffectSearchResults(String effectDescription) {
+        return mRepository.getEffectSearchResults(effectDescription);
+    }
+
     public LiveData<List<Food>> getTypeFilterResults(String property) {
         return mRepository.getTypeFilterResults(property);
     }
