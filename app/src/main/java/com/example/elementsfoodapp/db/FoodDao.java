@@ -58,5 +58,11 @@ public interface FoodDao {
     @Query("SELECT * FROM food_table WHERE favorite_food == 1")
     LiveData<List<Food>> getFavoriteFoods();
 
+    @Query("UPDATE food_table SET timestamp = CURRENT_TIMESTAMP WHERE id == :foodId")
+    void insertLastViewedFood(int foodId);
+
+    @Query("SELECT * FROM food_table WHERE timestamp != 0 ORDER BY timestamp DESC LIMIT 10")
+    LiveData<List<Food>> getLastViewedFoods();
+
 
 }

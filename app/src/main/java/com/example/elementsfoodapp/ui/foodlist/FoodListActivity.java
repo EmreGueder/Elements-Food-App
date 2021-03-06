@@ -79,6 +79,7 @@ public class FoodListActivity extends AppCompatActivity {
                 foodData[6] = food.getTargetOrgan();
                 intent.putExtra(AddEditFoodActivity.EXTRA_ID, food.getId());
                 intent.putExtra(AddEditFoodActivity.EXTRA_REPLY, foodData);
+                mFoodViewModel.insertLastViewedFood(food.getId());
                 startActivityForResult(intent, EDIT_FOOD_ACTIVITY_REQUEST_CODE);
             }
         });

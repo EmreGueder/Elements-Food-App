@@ -66,6 +66,7 @@ public class FoodRepository {
             mFoodDao.insertFavoriteFood(foodId);
         });
     }
+
     public LiveData<List<Food>> getFavoriteFoods() {
         return mFoodDao.getFavoriteFoods();
     }
@@ -75,4 +76,12 @@ public class FoodRepository {
             mFoodDao.deleteFavoriteFood(foodId);
         });
     }
+
+    public void insertLastViewedFood(int foodId) {
+        FoodRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mFoodDao.insertLastViewedFood(foodId);
+        });
+    }
+
+    public LiveData<List<Food>> getLastViewedFoods() { return mFoodDao.getLastViewedFoods(); }
 }

@@ -45,6 +45,9 @@ public class Food {
     @ColumnInfo(name = "favorite_food")
     private int mFavorite;
 
+    @ColumnInfo(name = "timestamp")
+    private int mTimestamp;
+
     public Food(@NonNull String food,
                 @NonNull String effect,
                 @NonNull String type,
@@ -61,6 +64,7 @@ public class Food {
         this.mThermalEffect = thermalEffect;
         this.mTargetOrgan = targetOrgan;
         this.mFavorite = 0;
+        this.mTimestamp = 0;
     }
 
     @Ignore
@@ -82,10 +86,12 @@ public class Food {
         this.mThermalEffect = thermalEffect;
         this.mTargetOrgan = targetOrgan;
         this.mFavorite = 0;
+        this.mTimestamp = 0;
     }
 
     public void setId(int id) { this.id = id; }
     public void setFavorite(int fav) { this.mFavorite = fav; }
+    public void setTimestamp(int timestamp) { this.mTimestamp = timestamp; }
     public int getId() { return id; }
     public String getFood() { return this.mFood; }
     public String getEffect() { return this.mEffect; }
@@ -95,5 +101,6 @@ public class Food {
     public String getThermalEffect() { return this.mThermalEffect; }
     public String getTargetOrgan() { return this.mTargetOrgan; }
     public int getFavorite() { return this.mFavorite; }
+    public int getTimestamp() { return this.mTimestamp; }
 }
 

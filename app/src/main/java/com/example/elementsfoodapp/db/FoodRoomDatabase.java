@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Food.class}, version = 4, exportSchema = false)
+@Database(entities = {Food.class}, version = 5, exportSchema = false)
 public abstract class FoodRoomDatabase extends RoomDatabase {
 
     public abstract FoodDao foodDao();

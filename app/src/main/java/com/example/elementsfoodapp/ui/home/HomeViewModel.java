@@ -1,7 +1,28 @@
 package com.example.elementsfoodapp.ui.home;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class HomeViewModel extends ViewModel {
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
+import com.example.elementsfoodapp.db.Food;
+import com.example.elementsfoodapp.db.FoodRepository;
+
+import java.util.List;
+
+public class HomeViewModel extends AndroidViewModel {
+
+    private FoodRepository mRepository;
+
+    public HomeViewModel(Application application) {
+        super(application);
+        mRepository = new FoodRepository(application);
+    }
+
+    public void update(Food food) { mRepository.update(food); }
+
+    public LiveData<List<Food>> getLastViewedFoods() { return mRepository.getLastViewedFoods(); }
+
+    public void insertLastViewedFood(int foodId) { mRepository.insertLastViewedFood(foodId); }
 
 }

@@ -55,4 +55,6 @@ public class FoodViewModel extends AndroidViewModel {
     }
 
     public void insertFavoriteFood(int foodId) { mRepository.insertFavoriteFood(foodId); }
+
+    public void insertLastViewedFood(int foodId) { mRepository.insertLastViewedFood(foodId); }
 }
