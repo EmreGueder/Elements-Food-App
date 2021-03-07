@@ -10,6 +10,7 @@ import com.example.elementsfoodapp.db.FoodRepository;
 
 import java.util.List;
 
+/**ViewModel classes are used from the activity to communicate with the database.*/
 public class FoodViewModel extends AndroidViewModel {
 
     private FoodRepository mRepository;

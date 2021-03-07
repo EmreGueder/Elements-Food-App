@@ -30,7 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
-
+/**Activity class to display, search and filter the food list*/
 public class FoodListActivity extends AppCompatActivity {
 
     public static final int ADD_FOOD_ACTIVITY_REQUEST_CODE = 1;

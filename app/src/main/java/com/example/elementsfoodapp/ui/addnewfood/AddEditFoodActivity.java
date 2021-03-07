@@ -23,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+/**This activity class handles the UI to add new food or edit food in the database. It is also
+ * used to show the food details.*/
 public class AddEditFoodActivity extends AppCompatActivity
         implements AddFoodAdapter.ListItemClickListener {
 

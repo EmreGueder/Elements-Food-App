@@ -23,6 +23,7 @@ import com.example.elementsfoodapp.ui.addnewfood.AddEditFoodActivity;
 
 import static android.app.Activity.RESULT_OK;
 
+/**Fragment to display the favorites list.*/
 public class FavoritesListFragment extends Fragment {
 
     public static final int EDIT_FOOD_ACTIVITY_REQUEST_CODE = 2;

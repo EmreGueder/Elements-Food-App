@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elementsfoodapp.R;
 
+/**This class binds the app data to the views (UI).*/
 public class AddFoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static ListItemClickListener mOnClickListener;

@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static android.app.Activity.RESULT_OK;
 
-
+/**Fragment displaying the home entry point which also shows the last viewed items.*/
 public class HomeFragment extends Fragment {
 
     public static final int EDIT_FOOD_ACTIVITY_REQUEST_CODE = 2;
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mAdapter.setOnItemClickListener(new FavoritesListAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new HomeListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Food food) {
                 Intent intent = new Intent(getActivity(), AddEditFoodActivity.class);

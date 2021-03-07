@@ -11,6 +11,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
+/**This class is used to interact with the database. Methods get annotated with queries and can then
+ * be later used to query the database.*/
 @Dao
 public interface FoodDao {
 

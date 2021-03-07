@@ -16,11 +16,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**This class binds the app data to the views (UI).*/
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.FoodViewHolder>{
 
     private final LayoutInflater mInflater;
     private List<Food> mFoods; // Cached copy of foods
-    private FavoritesListAdapter.OnItemClickListener listener;
+    private HomeListAdapter.OnItemClickListener listener;
 
     HomeListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -82,7 +83,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.FoodVi
         void onItemClick(Food food);
     }
 
-    public void setOnItemClickListener(FavoritesListAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(HomeListAdapter.OnItemClickListener listener) {
         this.listener = listener;
     }
 }

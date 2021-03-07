@@ -7,7 +7,8 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
+/**This class is representing a entity for the Database. Room is using the following members and
+ * methods to generate it.*/
 @Entity(tableName = "food_table")
 public class Food {
 

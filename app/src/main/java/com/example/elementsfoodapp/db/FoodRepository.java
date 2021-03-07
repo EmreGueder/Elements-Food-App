@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+/**A layer to decouple the database from the rest of the codebase. Database write operations take
+ * place in the background because the main thread is mainly used for the UI.*/
 public class FoodRepository {
 
     private FoodDao mFoodDao;

@@ -11,6 +11,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
+/**Main entry point for the application. Initializes the bottom navigation view and also holds the
+ * Home and Favorites fragment.*/
 public class MainActivity extends AppCompatActivity {
 
     @Override
